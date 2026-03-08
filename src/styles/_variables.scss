@@ -1,0 +1,77 @@
+// ========================
+// Brand
+// ========================
+
+$primary: #E19B88;
+$primary-dark: #C97C6A;
+
+// ========================
+// Secondary
+// ========================
+
+$mist-blue: #C6D1DB;
+$ocean-blue: #AEBBC6;
+
+// ========================
+// Surface
+// ========================
+
+$warm-sand: #F3EEE9;
+$milk-cream: #FBF9F6;
+
+// ========================
+// Text
+// ========================
+
+$text-main: #5E463F;
+$text-soft: #8A7066;
+
+// ========================
+// Hako
+// ========================
+
+$hako-fur: #DFC3B3;
+$hako-belly: #F4E9E3;
+$hako-nose: #8B6A5C;
+$hako-shade: #CFAF9F;
+$hako-highlight: #F8F1EC;
+
+// ========================
+// Sky
+// ========================
+
+$sky-light: #F4F7FA;
+$sky-soft: #E8EFF4;
+$sky-mist: #D8E2EA;
+
+// ========================
+// Sea
+// ========================
+
+$sea-soft: #B9C9D6;
+
+// ========================
+// UI System
+// ========================
+
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 40px;
+
+$shadow-soft: 0 6px 20px rgba(0,0,0,0.06);
+
+// ========================
+// Gradients
+// ========================
+
+$sky-gradient: linear-gradient(
+  to bottom,
+  $sky-light,
+  $sky-soft,
+  $warm-sand
+);

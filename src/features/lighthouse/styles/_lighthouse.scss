@@ -1,0 +1,151 @@
+@use "../../../styles/variables" as *;
+
+.lighthouse {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+.lighthouse-header {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.lighthouse-subtitle {
+  margin-top: 8px;
+  color: $text-soft;
+}
+
+.lighthouse-filters {
+  max-width: 720px;
+  margin: 0 auto 24px;
+
+  padding: 16px 24px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lighthouse-search {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+}
+
+.lighthouse-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+  justify-content: center;
+}
+
+.lighthouse-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.lighthouse-filter select {
+  min-width: 150px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+}
+
+.lighthouse-results {
+  margin-top: 8px;
+}
+
+.lighthouse-empty {
+  color: $text-soft;
+}
+
+.resource-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resource-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.resource-card-main {
+  flex: 1;
+}
+
+.resource-name {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.resource-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.resource-location {
+  font-size: 13px;
+  color: $text-soft;
+}
+
+.resource-note {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.03);
+  font-size: 12px;
+}
+
+.resource-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .lighthouse-filters {
+    padding: 12px 16px;
+    border-radius: 24px;
+  }
+
+  .resource-card {
+    flex-direction: column;
+  }
+
+  .resource-card-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

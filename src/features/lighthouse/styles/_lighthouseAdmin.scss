@@ -1,0 +1,65 @@
+@use "../../../styles/variables" as *;
+
+.lighthouse-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lighthouse-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.lighthouse-admin-form label {
+  font-size: 13px;
+  color: $text-main;
+}
+
+.lighthouse-admin-form input,
+.lighthouse-admin-form select,
+.lighthouse-admin-form textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+}
+
+.lighthouse-admin-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lighthouse-admin-table {
+  width: 100%;
+  margin-top: 16px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.lighthouse-admin-table th,
+.lighthouse-admin-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.lighthouse-admin-table th {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 768px) {
+  .lighthouse-admin-table {
+    font-size: 12px;
+  }
+
+  .lighthouse-admin-table th,
+  .lighthouse-admin-table td {
+    padding: 6px 8px;
+  }
+}

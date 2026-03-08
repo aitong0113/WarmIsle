@@ -1,0 +1,30 @@
+@use "../variables" as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 10px 16px;
+
+  border-radius: $radius-md;
+  border: none;
+
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: all .2s ease;
+
+  background: $primary;
+  color: white;
+}
+
+.btn:hover {
+  background: $primary-dark;
+  transform: translateY(-1px);
+}
+
+.btn-soft {
+  background: $warm-sand;
+  color: $text-main;
+}

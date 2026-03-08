@@ -1,0 +1,32 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Emotion Beach Placeholder</title>
+  <desc id="desc">A simple sunset beach illustration with room for text.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe5d1" />
+      <stop offset="50%" stop-color="#ffc6c6" />
+      <stop offset="100%" stop-color="#f6b0d1" />
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9fd2ff" />
+      <stop offset="100%" stop-color="#4b86c6" />
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f9e4c3" />
+      <stop offset="100%" stop-color="#e4c596" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="480" fill="url(#sky)" />
+  <rect y="360" width="1200" height="220" fill="url(#sea)" />
+  <rect y="520" width="1200" height="280" fill="url(#sand)" />
+
+  <circle cx="220" cy="170" r="70" fill="#ffe9a3" opacity="0.9" />
+
+  <text x="50%" y="620" text-anchor="middle" fill="#704c2e" font-size="32" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif">
+    情緒沙灘 Emotion Beach
+  </text>
+  <text x="50%" y="660" text-anchor="middle" fill="#8a6741" font-size="18" font-family="-apple-system, BlinkMacSystemFont, system-ui, sans-serif">
+    Placeholder background — write your own story here
+  </text>
+</svg>

@@ -1,0 +1,154 @@
+@use "../../../styles/variables" as *;
+
+.emotion-beach {
+  max-width: 720px;
+  margin: 0 auto;
+
+  /* 先用單純白色卡片，不加多餘顏色 */
+  background: #ffffff;
+
+  padding: 24px 18px 32px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06);
+
+  backdrop-filter: blur(2px);
+}
+
+.emotion-beach-header {
+  margin-bottom: 24px;
+}
+
+.emotion-bottle-create,
+.emotion-bottle-random {
+  margin-bottom: 32px;
+}
+
+.emotion-bottle-textarea,
+.emotion-bottle-reply-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid $warm-sand;
+  margin: 8px 0 12px;
+}
+
+.emotion-bottle-card {
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.emotion-bottle-content {
+  margin-bottom: 8px;
+}
+
+.emotion-bottle-meta {
+  font-size: 12px;
+  color: $text-soft;
+  margin-bottom: 12px;
+}
+
+.emotion-bottle-replies ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+
+.emotion-bottle-replies li {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.emotion-bottle-empty {
+  color: $text-soft;
+}
+
+.emotion-my-writings {
+  margin-top: 40px;
+}
+
+.emotion-my-writings-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.emotion-my-writings-item {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.emotion-my-writings-date {
+  display: block;
+  font-size: 12px;
+  color: $text-soft;
+  margin-bottom: 4px;
+}
+
+.emotion-my-writings-content {
+  font-size: 14px;
+}
+
+.emotion-my-writings-replies {
+  display: block;
+  font-size: 12px;
+  color: $text-soft;
+  margin-top: 2px;
+}
+
+.emotion-bottle-feedback {
+  margin-top: 8px;
+  font-size: 13px;
+  color: $text-soft;
+}
+
+.emotion-bottle-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.emotion-bottle-reply-box {
+  margin-top: 8px;
+}
+
+.emotion-bottle-reply-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.emotion-my-link {
+  margin-left: 8px;
+}
+
+.emotion-btn {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid $warm-sand;
+
+  background: white;
+
+  cursor: pointer;
+
+  transition: all .2s;
+}
+
+.emotion-btn:hover {
+  background: $warm-sand;
+}
+
+@media (max-width: 768px) {
+  .emotion-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
