@@ -1,14 +1,65 @@
 @use "../../../styles/variables" as *;
 
 .lighthouse {
+  position: relative;
   max-width: 960px;
   margin: 0 auto;
   padding-inline: 24px;
 }
 
+.lighthouse-scene {
+  position: absolute;
+  inset: -20px 0 auto;
+  height: 240px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lighthouse-scene__beam,
+.lighthouse-scene__orb {
+  position: absolute;
+}
+
+.lighthouse-scene__orb {
+  right: 10%;
+  top: 12px;
+  width: 112px;
+  height: 112px;
+  border-radius: 999px;
+  background: radial-gradient(circle, $feature-lighthouse-orb-core 0%, $feature-lighthouse-orb-halo 70%, transparent 72%);
+}
+
+.lighthouse-scene__beam {
+  top: 12px;
+  width: 280px;
+  height: 180px;
+  background: linear-gradient(90deg, $feature-lighthouse-beam, transparent 78%);
+  filter: blur(8px);
+}
+
+.lighthouse-scene__beam--left {
+  left: 16%;
+  transform: rotate(-10deg);
+}
+
+.lighthouse-scene__beam--right {
+  right: 14%;
+  transform: rotate(16deg);
+}
+
 .lighthouse-header {
   margin-bottom: 16px;
   text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.lighthouse-header__eyebrow {
+  margin: 0 0 8px;
+  color: $ocean-deep;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .lighthouse-subtitle {
@@ -19,11 +70,13 @@
 .lighthouse-filters {
   max-width: 720px;
   margin: 0 auto 24px;
+  position: relative;
+  z-index: 1;
 
   padding: 16px 24px;
   border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+  background: rgba($surface-soft, 0.94);
+  box-shadow: $shadow-soft;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -33,7 +86,7 @@
   width: 100%;
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba($primary, 0.14);
   font-size: 14px;
 }
 
@@ -56,12 +109,14 @@
   min-width: 150px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba($primary, 0.14);
   font-size: 14px;
 }
 
 .lighthouse-results {
   margin-top: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 .lighthouse-empty {
@@ -84,8 +139,8 @@
   gap: 16px;
   padding: 16px 20px;
   border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  background: $panel-gradient;
+  box-shadow: $shadow-soft;
 }
 
 .resource-card-main {
@@ -124,7 +179,7 @@
 .tag {
   padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba($primary, 0.08);
   font-size: 12px;
 }
 

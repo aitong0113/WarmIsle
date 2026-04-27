@@ -1,7 +1,7 @@
 @use "../variables" as *;
 
 .card {
-  background: $milk-cream;
+  background: $panel-gradient;
 
   border-radius: $radius-lg;
 
@@ -9,5 +9,5 @@
 
   box-shadow: $shadow-soft;
 
-  border: 1px solid rgba(0,0,0,0.03);
+  border: 1px solid rgba($primary, 0.12);
 }

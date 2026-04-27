@@ -35,3 +35,6 @@ dist-ssr
 # storybook
 *storybook.log
 storybook-static
+
+# supabase local temp
+supabase/.temp/

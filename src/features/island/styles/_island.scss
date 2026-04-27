@@ -1,140 +1,540 @@
 @use "../../../styles/variables" as *;
 
-.island-world {
-  position: relative;
-  height: 750px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #e9f1f7 0%,
-      #dfe9f1 50%,
-      #f2ede7 100%
-    );
-
-  border-radius: 24px;
-
+body:has(.app-main--island) {
   overflow: hidden;
-
-  padding-top: 60px;
-
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-.island-world::before {
+.island-page {
+  width: 100%;
+}
+
+.island-world {
+  --scene-scale: 1.1;
+  --scene-shift-x: -1.2%;
+  --scene-shift-y: 4.2%;
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100svh;
+  min-height: 0;
+  max-width: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  background: linear-gradient(180deg, $sky-light 0%, $sky-mist 100%);
+}
+
+.island-world__quick-shell {
+  position: absolute;
+  top: 132px;
+  left: 18px;
+  z-index: 6;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.island-world__quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.island-world__quick-button {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba($accent-coral-500, 0.9);
+  border-radius: 12px;
+  background: rgba($surface-elevated, 0.78);
+  color: rgba($accent-coral-600, 0.96);
+  box-shadow: 0 12px 22px rgba(38, 55, 74, 0.12);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.island-world__quick-button:hover,
+.island-world__quick-button:focus-visible,
+.island-world__quick-button.is-active {
+  transform: translateY(-1px);
+  background: rgba($surface-elevated, 0.94);
+  box-shadow: 0 16px 28px rgba(38, 55, 74, 0.18);
+}
+
+.island-world__info-panel {
+  position: relative;
+  width: min(540px, calc(100vw - 150px));
+  max-height: calc(100dvh - 188px);
+  overflow-y: auto;
+  padding: 20px 22px;
+  border-radius: 28px 28px 28px 12px;
+  background: rgba(255, 252, 248, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 22px 44px rgba(47, 63, 83, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  scrollbar-width: none;
+}
+
+.island-world__info-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.island-world__info-panel::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background:
-    url("../../../assets/global/island/island-map-placeholder.svg")
-      center/cover no-repeat;
-  opacity: 0.45;
-  pointer-events: none;
+  top: 26px;
+  left: -10px;
+  width: 22px;
+  height: 22px;
+  border-left: 1px solid rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba(255, 252, 248, 0.76);
+  transform: rotate(45deg);
 }
 
-.sky {
-  position: absolute;
+.island-world__info-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.island-world__info-panel-kicker {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba($primary-dark, 0.72);
+}
+
+.island-world__info-panel h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+  color: $text-main;
+}
+
+.island-world__info-close {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.52);
+  color: rgba($text-main, 0.7);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.island-world__bubble-block {
+  margin-top: 14px;
+}
+
+.island-world__bubble-copy,
+.island-world__bubble-note-preview p,
+.island-world__bubble-feedback,
+.island-world__calendar-summary {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba($text-main, 0.88);
+}
+
+.island-world__bubble-current {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.island-world__bubble-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba($primary-dark, 0.72);
+}
+
+.island-world__info-panel .emotion-selector-inline {
+  margin: 14px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.island-world__note-input {
   width: 100%;
-  top: 0;
+  min-height: 108px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba($primary, 0.16);
+  background: rgba($surface-elevated, 0.92);
+  color: $text-main;
+  font: inherit;
+  line-height: 1.65;
+  resize: vertical;
 }
 
-.cloud {
+.island-world__note-input:focus {
+  outline: none;
+  border-color: rgba($primary-dark, 0.32);
+  box-shadow: 0 0 0 4px rgba($primary-soft, 0.22);
+}
+
+.island-world__bubble-actions {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.island-world__bubble-feedback {
+  color: rgba($primary-dark, 0.8);
+}
+
+.island-world__bubble-link {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: $primary-dark;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.island-world__info-panel .emotion-calendar-widget {
+  margin-top: 14px;
+}
+
+.island-world__status-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.island-world__status-card,
+.island-world__bubble-note-preview {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba($surface-elevated, 0.78);
+  border: 1px solid rgba($mist-blue, 0.46);
+}
+
+.island-world__status-card strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+  color: $text-main;
+}
+
+.island-world__bubble-note-preview {
+  margin-top: 12px;
+}
+
+.island-world__scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.island-world__backdrop,
+.island-world__map,
+.island-world__veil {
   position: absolute;
-  width: 120px;
-  height: 40px;
-
-  background: white;
-
-  border-radius: 40px;
-
-  opacity: 0.6;
+  inset: 0;
 }
 
-.cloud-1 {
-  left: 20%;
-  top: 40px;
+.island-world__backdrop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  transform: none;
+  opacity: 1;
 }
 
-.cloud-2 {
-  right: 20%;
-  top: 70px;
+.island-world__map {
+  display: none;
+}
+
+.island-world__veil {
+  background: $feature-island-veil;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .island-item {
   position: absolute;
   text-decoration: none;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.island-card {
-  background: #ffffff;
-
-  padding: 16px 18px;
-
-  width: 140px;
-
-  border-radius: 20px;
-
-  text-align: center;
-
-  box-shadow: 
-    0 10px 25px rgba(0,0,0,0.08);
-
-  transition: all 0.25s ease;
-}
-
-.island-card:hover {
-  transform: translateY(-6px) scale(1.05);
-
+.island-label {
+  min-height: 32px;
+  padding: 7px 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: rgba($surface-elevated, 0.96);
   box-shadow:
-    0 20px 35px rgba(0,0,0,0.12);
-}
-
-.island-icon {
-  font-size: 32px;
-  margin-bottom: 4px;
-}
-
-.island-title {
+    0 10px 24px rgba(38, 55, 74, 0.16),
+    inset 0 1px 0 rgba($surface-elevated, 0.82);
   color: $text-main;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border: 1px solid $state-border-strong;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
 }
 
-.island-subtitle {
-  color: $text-soft;
-  font-size: 12px;
-  margin-top: 4px;
-  white-space: nowrap;
+.island-label__icon {
+  width: 15px;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: $primary-dark;
+}
+
+.island-label__lock {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: $state-lock-text;
+}
+
+.island-label__trail {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  color: rgba($text-main, 0.48);
+  transition: transform 0.22s ease, color 0.22s ease, opacity 0.22s ease;
+}
+
+.island-item:hover .island-label,
+.island-item:focus-visible .island-label,
+.island-item:focus-within .island-label {
+  transform: translateY(-2px) scale(1.04);
+  background: $surface-elevated;
+  border-color: $state-hover-border;
+  box-shadow:
+    0 16px 30px rgba(38, 55, 74, 0.24),
+    inset 0 1px 0 rgba($surface-elevated, 0.9),
+    0 0 0 3px rgba($accent-coral-100, 0.24);
+}
+
+.island-item:hover .island-label__trail,
+.island-item:focus-visible .island-label__trail,
+.island-item:focus-within .island-label__trail {
+  color: rgba($primary-dark, 0.92);
+  transform: translate(1px, -1px);
+}
+
+.island-item:hover .island-label__lock,
+.island-item:focus-visible .island-label__lock,
+.island-item:focus-within .island-label__lock {
+  color: rgba($primary-dark, 0.96);
 }
 
 .island-world .beach {
-  top: 320px;
-  left: 25%;
+  left: 33.2%;
+  top: 71.8%;
+  transform: translate(-50%, -50%);
 }
 
-.island-world .house {
-  top: 320px;
-  right: 25%;
+.island-world .cabin {
+  left: 46.7%;
+  top: 57.2%;
+  transform: translate(-50%, -50%);
 }
 
 .island-world .dock {
-  left: 23%;
-  top: 480px;
-  transform: translateX(-50%);
+  left: 76.9%;
+  top: 77.2%;
+  transform: translate(-50%, -50%);
 }
 
 .island-world .lighthouse {
-  left: 50%;
-  top: 560px;
-  transform: translateX(-50%);
+  left: 35.2%;
+  top: 32.8%;
+  transform: translate(-50%, -50%);
 }
 
 .island-world .campfire {
-  left: 50%;
-  top: 420px;
-  left: 40%;
+  left: 66.6%;
+  top: 49%;
+  transform: translate(-50%, -50%);
 }
 
 .island-world .meditation {
-  top: 460px;
-  right: 20%;
+  left: 61.2%;
+  top: 81.4%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 900px) {
+  .island-world {
+    --scene-scale: 1.14;
+    --scene-shift-x: -0.8%;
+    --scene-shift-y: 5.2%;
+    height: 100dvh;
+    min-height: 100svh;
+  }
+
+  .island-world__quick-shell {
+    top: 120px;
+    left: 14px;
+    gap: 14px;
+  }
+  .island-world__info-panel {
+    width: min(380px, calc(100vw - 132px));
+    padding: 18px;
+  }
+
+  .island-world__info-panel h2 {
+    font-size: 24px;
+  }
+
+  .island-world__status-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .island-world__quick-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .island-label {
+    min-height: 30px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .island-label__icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .island-label__lock {
+    width: 13px;
+    height: 13px;
+  }
+
+  .island-label__trail {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+@media (max-width: 640px) {
+  .island-world {
+    --scene-scale: 1.18;
+    --scene-shift-x: -0.4%;
+    --scene-shift-y: 6%;
+    height: 100dvh;
+    min-height: 100svh;
+  }
+
+  .island-world__quick-shell {
+    top: 108px;
+    left: 12px;
+    right: 12px;
+    gap: 10px;
+  }
+  .island-world__info-panel {
+    width: min(100%, 320px);
+    max-height: calc(100dvh - 220px);
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .island-world__info-panel::before {
+    top: 22px;
+    left: -8px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .island-world__info-panel h2 {
+    font-size: 20px;
+  }
+
+  .island-world__bubble-copy,
+  .island-world__bubble-note-preview p,
+  .island-world__bubble-feedback,
+  .island-world__calendar-summary {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .island-world__note-input {
+    min-height: 88px;
+  }
+
+  .island-world__info-panel .emotion-calendar__day {
+    min-height: 44px;
+    padding: 6px 4px;
+  }
+
+  .island-world__status-card strong {
+    font-size: 16px;
+  }
+
+
+  .island-world__quick-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+
+  .island-label {
+    min-height: 28px;
+    padding: 5px 9px;
+    gap: 5px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .island-label__icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .island-label__lock {
+    width: 11px;
+    height: 11px;
+  }
+
+  .island-label__trail {
+    width: 10px;
+    height: 10px;
+  }
 }

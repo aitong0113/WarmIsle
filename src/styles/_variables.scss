@@ -1,30 +1,76 @@
 // ========================
-// Brand
+// Accent
 // ========================
 
-$primary: #E19B88;
-$primary-dark: #C97C6A;
+$accent-coral-500: #d88d74;
+$accent-coral-600: #b86a57;
+$accent-coral-200: #f0d4c8;
+$accent-coral-100: #faece5;
 
-// ========================
-// Secondary
-// ========================
-
-$mist-blue: #C6D1DB;
-$ocean-blue: #AEBBC6;
+$accent-mist-300: #c9d9df;
+$accent-mist-500: #95afbb;
+$accent-mist-700: #627f8f;
+$accent-sage-200: #dbe8df;
+$accent-sage-500: #7f9f8d;
 
 // ========================
 // Surface
 // ========================
 
-$warm-sand: #F3EEE9;
-$milk-cream: #FBF9F6;
+$surface-ground: #f4ede5;
+$surface-panel: #fbf4ee;
+$surface-cream: #fffaf6;
+$surface-elevated: #fffdfb;
+$surface-muted: #f6efe8;
 
 // ========================
 // Text
 // ========================
 
-$text-main: #5E463F;
-$text-soft: #8A7066;
+$text-strong: #54423c;
+$text-muted: #7d6760;
+$text-faint: #a18b83;
+
+// ========================
+// State
+// ========================
+
+$state-border-subtle: rgba($accent-coral-500, 0.12);
+$state-border-soft: rgba($accent-coral-200, 0.42);
+$state-border-strong: rgba($accent-coral-500, 0.34);
+$state-hover-fill: rgba($surface-elevated, 0.72);
+$state-hover-fill-soft: rgba($surface-elevated, 0.22);
+$state-hover-border: rgba($accent-coral-200, 0.52);
+$state-active-fill: rgba($accent-coral-500, 0.12);
+$state-active-border: rgba($accent-coral-500, 0.36);
+$state-focus-ring: 0 0 0 4px rgba($accent-coral-500, 0.12);
+$state-focus-outline: rgba($accent-coral-200, 0.88);
+$state-lock-fill: rgba($surface-panel, 0.5);
+$state-lock-border: rgba($accent-coral-200, 0.3);
+$state-lock-text: rgba($accent-coral-600, 0.82);
+
+// ========================
+// Legacy aliases
+// ========================
+
+$primary: $accent-coral-500;
+$primary-dark: $accent-coral-600;
+$primary-soft: $accent-coral-200;
+$primary-mist: $accent-coral-100;
+
+$mist-blue: $accent-mist-300;
+$ocean-blue: $accent-mist-500;
+$ocean-deep: $accent-mist-700;
+$sage-soft: $accent-sage-200;
+$sage: $accent-sage-500;
+
+$warm-sand: $surface-ground;
+$warm-shell: $surface-panel;
+$milk-cream: $surface-cream;
+$surface-soft: $surface-elevated;
+
+$text-main: $text-strong;
+$text-soft: $text-muted;
 
 // ========================
 // Hako
@@ -40,15 +86,24 @@ $hako-highlight: #F8F1EC;
 // Sky
 // ========================
 
-$sky-light: #F4F7FA;
-$sky-soft: #E8EFF4;
-$sky-mist: #D8E2EA;
+$sky-light: #f4f7f8;
+$sky-soft: #e7eef0;
+$sky-mist: #d9e3e8;
 
 // ========================
 // Sea
 // ========================
 
-$sea-soft: #B9C9D6;
+$sea-soft: #b9cdd7;
+
+// ========================
+// Dusk
+// ========================
+
+$dusk-panel: #32465c;
+$dusk-panel-deep: #1f3043;
+$dusk-text: #f7efe8;
+$dusk-muted: rgba(247, 239, 232, 0.78);
 
 // ========================
 // UI System
@@ -63,15 +118,66 @@ $space-md: 16px;
 $space-lg: 24px;
 $space-xl: 40px;
 
-$shadow-soft: 0 6px 20px rgba(0,0,0,0.06);
+$shadow-soft: 0 10px 28px rgba(36, 46, 58, 0.08);
+$shadow-panel: 0 18px 42px rgba(54, 64, 82, 0.12);
+$shadow-float: 0 22px 54px rgba(43, 56, 73, 0.16);
 
 // ========================
 // Gradients
 // ========================
 
-$sky-gradient: linear-gradient(
-  to bottom,
-  $sky-light,
-  $sky-soft,
-  $warm-sand
-);
+$sky-gradient: linear-gradient(to bottom, $sky-light, $sky-soft, $warm-sand);
+$shore-gradient: linear-gradient(180deg, $surface-muted 0%, #edf4f6 26%, $milk-cream 100%);
+$panel-gradient: linear-gradient(180deg, rgba($surface-soft, 0.96), rgba($warm-shell, 0.92));
+$glass-gradient: linear-gradient(180deg, rgba($milk-cream, 0.82), rgba($warm-shell, 0.66));
+$dusk-gradient: linear-gradient(180deg, rgba($dusk-panel, 0.86) 0%, rgba($dusk-panel-deep, 0.9) 100%);
+
+// ========================
+// Feature Tints
+// ========================
+
+$feature-island-wash: linear-gradient(180deg, $sky-light 0%, $sky-mist 100%);
+$feature-island-veil: linear-gradient(180deg, rgba($surface-soft, 0.08), rgba($surface-soft, 0));
+
+$feature-emotion-sun-core: #f8edd2;
+$feature-emotion-sun-halo: rgba(#f4ddb5, 0.18);
+$feature-emotion-wave: rgba($mist-blue, 0.4);
+$feature-emotion-note: rgba($primary-soft, 0.34);
+$feature-emotion-breeze: linear-gradient(145deg, mix($sky-soft, #ffffff, 72%) 0%, mix($milk-cream, $sky-light, 82%) 38%, $surface-soft 100%);
+$feature-emotion-card: linear-gradient(180deg, $surface-soft 0%, mix($warm-shell, $milk-cream, 70%) 100%);
+$feature-emotion-entry: linear-gradient(180deg, mix($primary-mist, $surface-soft, 72%) 0%, $surface-soft 100%);
+$feature-emotion-streak: linear-gradient(180deg, mix($primary-soft, $surface-soft, 55%) 0%, mix($warm-shell, $surface-soft, 78%) 100%);
+
+$feature-campfire-moon-core: #f6eedf;
+$feature-campfire-moon-halo: rgba($primary-soft, 0.14);
+$feature-campfire-glow: rgba($primary, 0.14);
+$feature-campfire-fire: rgba($primary-dark, 0.12);
+$feature-campfire-hero: linear-gradient(180deg, rgba($surface-soft, 0.9) 0%, rgba($warm-shell, 0.82) 100%);
+$feature-campfire-hero-panel: rgba($primary-soft, 0.28);
+$feature-campfire-hero-border: rgba($primary, 0.16);
+$feature-campfire-player: linear-gradient(180deg, rgba($milk-cream, 0.98) 0%, rgba($warm-sand, 0.98) 100%);
+
+$feature-meditation-sun-core: #f6efda;
+$feature-meditation-sun-halo: rgba(#efe0b5, 0.18);
+$feature-meditation-ring: rgba($mist-blue, 0.36);
+$feature-meditation-blue-card: linear-gradient(180deg, mix($sky-soft, #ffffff, 72%) 0%, mix($mist-blue, #ffffff, 82%) 100%);
+$feature-meditation-purple-card: linear-gradient(180deg, #f3edf7 0%, #ebe3f1 100%);
+$feature-meditation-green-card: linear-gradient(180deg, #edf6f0 0%, #e0eee4 100%);
+$feature-meditation-orange-card: linear-gradient(180deg, #fbefe7 0%, #f5e1d5 100%);
+$feature-meditation-blue-circle: radial-gradient(circle at 30% 0%, #edf4f7, #c9dce4 58%, #a4bcc8 100%);
+$feature-meditation-purple-circle: radial-gradient(circle at 30% 0%, #f1edf5, #d6cadf 58%, #b7a9c3 100%);
+$feature-meditation-green-circle: radial-gradient(circle at 30% 0%, #edf5f0, #cadfce 58%, #a6c0ae 100%);
+$feature-meditation-orange-circle: radial-gradient(circle at 30% 0%, #fbf0e8, #e9cfc0 58%, #d6b09d 100%);
+
+$feature-lighthouse-orb-core: #f8efd8;
+$feature-lighthouse-orb-halo: rgba(#f0deb6, 0.18);
+$feature-lighthouse-beam: rgba($primary-soft, 0.22);
+
+$feature-intro-surface: #26374a;
+$feature-intro-sky: rgba($mist-blue, 0.2);
+$feature-intro-panel-top: rgba($dusk-panel, 0.76);
+$feature-intro-panel-bottom: rgba($dusk-panel-deep, 0.72);
+$feature-intro-glass: rgba($surface-soft, 0.08);
+$feature-intro-glass-strong: rgba($surface-soft, 0.14);
+$feature-intro-border: rgba($primary-soft, 0.28);
+$feature-intro-border-strong: rgba($primary-soft, 0.46);

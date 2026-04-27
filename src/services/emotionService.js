@@ -1,7 +1,9 @@
+import { todayLocalDate } from "../utils/date";
+
 const EMOTION_STORAGE_KEY = "warmisle_emotion_state_v1";
 
 /**
- * @typedef {{ todayEmotion: string | null, emotionLogs: Array<{ emotion: string, date: string }> }} EmotionState
+ * @typedef {{ todayEmotion: string | null, emotionLogs: Array<{ emotion: string | null, date: string, note?: string }> }} EmotionState
  */
 
 /**
@@ -27,10 +29,24 @@ export function loadEmotionState() {
       return { todayEmotion: null, emotionLogs: [] };
     }
 
-    return {
+    const state = {
       todayEmotion: parsed.todayEmotion ?? null,
       emotionLogs: Array.isArray(parsed.emotionLogs) ? parsed.emotionLogs : []
     };
+
+    // 若最後一筆心情紀錄不是「今天」，就自動清空 todayEmotion（但保留歷史紀錄）
+    const today = todayLocalDate();
+    const latestLogDate = state.emotionLogs.reduce((latest, log) => {
+      if (!log?.date) return latest;
+      if (!latest) return log.date;
+      return log.date > latest ? log.date : latest;
+    }, null);
+
+    if (!latestLogDate || latestLogDate !== today) {
+      state.todayEmotion = null;
+    }
+
+    return state;
   } catch (error) {
     console.warn("Failed to load emotion state from localStorage", error);
     return { todayEmotion: null, emotionLogs: [] };

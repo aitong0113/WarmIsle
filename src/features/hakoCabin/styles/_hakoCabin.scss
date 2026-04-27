@@ -1,37 +1,1175 @@
 @use "../../../styles/variables" as *;
 
-.diary-cabin {
-  max-width: 720px;
+$hako-panel-gradient: rgba($milk-cream, 0.97);
+$hako-sidebar-gradient: rgba($milk-cream, 0.95);
+$hako-sidebar-top-gradient: rgba($milk-cream, 0.92);
+$hako-welcome-gradient: rgba($milk-cream, 0.88);
+$hako-user-bubble-gradient: rgba($warm-shell, 0.34);
+$hako-assistant-bubble-gradient: rgba($milk-cream, 0.9);
+$hako-primary-button-gradient: rgba($primary, 0.92);
+$hako-send-button-gradient: rgba($warm-shell, 0.76);
+$hako-panel-shadow: 0 22px 54px rgba($accent-mist-700, 0.1);
+$hako-sidebar-shadow: 0 14px 32px rgba($accent-mist-700, 0.08);
+$hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
+
+// 場景背景
+.hako-cabin-shell {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  padding: 0 0 44px;
+  isolation: isolate;
+  color: rgba($dusk-text, 0.92);
+  --hako-cabin-bg-image: url("../../../assets/scenes/cabin/cabin-bg-mobile.png");
+  --hako-cabin-bg-size: 190% auto;
+  --hako-cabin-bg-position: center top;
+  --hako-cabin-overlay-opacity: 0.22;
+}
+
+.hako-cabin-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba($milk-cream, 0.1), rgba($milk-cream, 0.04)),
+    var(--hako-cabin-bg-image) var(--hako-cabin-bg-position) / var(--hako-cabin-bg-size) no-repeat,
+    linear-gradient(180deg, rgba($milk-cream, 0.03), rgba($milk-cream, 0));
+  filter: saturate(0.86) contrast(1.01);
+  opacity: 0.9;
+  border-radius: 0;
+}
+
+.hako-cabin-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background: rgba($warm-shell, 0.02);
+}
+
+.hako-cabin-workspace {
+  position: relative;
+  height: 90%;
+  max-width: 1340px;
   margin: 0 auto;
+  padding: 92px 24px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.diary-cabin-header {
-  margin-bottom: 16px;
-}
-
-.diary-cabin-subtitle {
-  margin-top: 8px;
-  color: $text-soft;
-}
-
-.diary-textarea {
+// 首屏 intro
+.hako-cabin-intro {
+  position: relative;
   width: 100%;
-  min-height: 120px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid $warm-sand;
+  max-width: 1180px;
+  min-height: min(720px, calc(100dvh - 180px));
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: visible;
 }
 
-.diary-save-btn {
-  margin-top: 8px;
-  padding: 8px 16px;
-  border-radius: 999px;
+.hako-cabin-hero {
+  position: absolute;
+  inset: auto;
+  left: 51.5%;
+  top: 164px;
+  bottom: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: min(400px, 44vw);
+  min-height: auto;
+  max-height: none;
+  transform: translateX(-50%);
+  background: transparent;
   border: none;
-  background: $warm-sand;
+  overflow: visible;
+  isolation: isolate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hako-cabin-hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  width: min(220px, 56%);
+  height: 36px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba($accent-coral-500, 0.48);
+  filter: blur(18px);
+  z-index: 0;
+}
+
+.hako-cabin-hero__halo {
+  position: absolute;
+  inset: 18px;
+  background: rgba($milk-cream, 0.04);
+  filter: blur(4px);
+  z-index: 0;
+}
+
+.hako-cabin-hero__image {
+  position: relative;
+  width: min(390px, 100%);
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba($primary-soft, 0.08));
+  align-self: center;
+  z-index: 2;
+}
+
+.hako-cabin-intro__bubble {
+  position: absolute;
+  top: 176px;
+  left: max(40px, calc(50% - 520px));
+  z-index: 2;
+  width: min(360px, calc(100% - 64px));
+  padding: 22px 24px;
+  border-radius: 28px;
+  background: rgba($milk-cream, 0.9);
+  border: 1px solid rgba($warm-shell, 0.24);
+  box-shadow: 0 14px 28px rgba($accent-mist-700, 0.08);
+  text-align: left;
+}
+
+.hako-cabin-intro__bubble::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba($milk-cream, 0.9);
+  border-right: 1px solid rgba($warm-shell, 0.24);
+  border-bottom: 1px solid rgba($warm-shell, 0.24);
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.hako-cabin-intro__eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba($text-main, 0.62);
+}
+
+.hako-cabin-intro__bubble p {
+  margin: 0;
+  color: rgba($text-main, 0.92);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.hako-cabin-intro__cta {
+  margin-top: 16px;
+  border: 1px solid rgba($primary, 0.28);
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: rgba($primary, 0.9);
+  color: $surface-soft;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.hako-cabin-intro__cta:hover {
+  background: rgba($primary-dark, 0.92);
+}
+
+// modal
+.hako-cabin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  border: none;
+  background: rgba($dusk-panel-deep, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hako-history-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 39;
+  border: none;
+  border-radius: 34px;
+  background: rgba($dusk-panel-deep, 0.14);
+}
+
+.hako-cabin {
+  min-width: 0;
+  height: 80%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: $hako-panel-gradient;
+  border: 1px solid rgba($warm-shell, 0.32);
+  border-radius: 34px;
+  box-shadow: $hako-panel-shadow;
+  backdrop-filter: blur(22px);
+  padding: 18px 20px 16px;
+}
+
+.hako-cabin--panel {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hako-cabin--modal {
+  position: fixed;
+  top:100px;
+  bottom: 40px;
+  left: 50%;
+  width: min(calc(100% - 70px), 1180px);
+  transform: translateX(-50%);
+  z-index: 41;
+}
+
+.hako-cabin-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 42;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 999px;
+  background: rgba($surface-soft, 0.92);
+  color: rgba($text-main, 0.8);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: $hako-soft-shadow;
+}
+
+.hako-cabin-modal-body {
+  display: grid;
+  grid-template-columns: 208px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding-top: 10px;
+}
+
+.hako-history-drawer {
+  position: relative;
+  width: 100%;
+  height: 98%;
+  min-height: 0;
+  z-index: 1;
+  transform: none;
+  transition: transform 220ms ease;
+}
+
+.hako-history-drawer.is-open {
+  transform: translateX(0);
+}
+
+.hako-cabin-sidebar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1;
+  padding: 0;
+  border-radius: 28px;
+  border: 1px solid rgba($warm-shell, 0.26);
+  background: $hako-sidebar-gradient;
+  box-shadow: $hako-sidebar-shadow;
+}
+
+.hako-sidebar-top {
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid rgba($warm-shell, 0.18);
+  background: $hako-sidebar-top-gradient;
+}
+
+.hako-sidebar-new-conversation {
+  width: 100%;
+  margin-bottom: 12px;
+  border: 1px solid rgba($warm-shell, 0.36);
+  border-radius: 18px;
+  padding: 12px 14px;
+  background: rgba($milk-cream, 0.82);
+  color: $text-main;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.hako-sidebar-new-conversation:hover {
+  transform: translateY(-1px);
+  box-shadow: none;
+  filter: none;
+  background: rgba($surface-soft, 0.94);
+}
+
+.hako-sidebar-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 12px 8px 16px;
+  overflow: hidden;
+}
+
+.hako-sidebar-footer {
+  padding: 12px 16px 14px;
+  border-top: 1px solid rgba($warm-shell, 0.18);
+  background: rgba($milk-cream, 0.78);
+}
+
+.hako-conversation-search {
+  position: relative;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.hako-conversation-search__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.hako-conversation-search__label-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hako-conversation-search__label {
+  color: rgba($text-main, 0.5);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hako-conversation-search__icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba($milk-cream, 0.72);
+  color: rgba($text-main, 0.6);
+  font-size: 11px;
+}
+
+.hako-conversation-search__count {
+  color: rgba($text-main, 0.44);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.hako-conversation-search__input {
+  width: 100%;
+  border: 1px solid rgba($warm-shell, 0.24);
+  border-radius: 999px;
+  padding: 10px 58px 10px 14px;
+  background: rgba($milk-cream, 0.6);
+  box-shadow: 0 8px 16px rgba($dusk-panel-deep, 0.05);
+  color: $text-main;
+  font-size: 12px;
+}
+
+.hako-conversation-search__input::placeholder {
+  color: rgba($text-main, 0.42);
+}
+
+.hako-conversation-search__clear {
+  position: absolute;
+  right: 6px;
+  bottom: 4px;
+  height: 30px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 999px;
+  background: rgba($warm-shell, 0.78);
+  color: rgba($text-main, 0.72);
+  font-size: 11px;
   cursor: pointer;
 }
 
-.diary-save-btn:hover {
-  background: $primary;
-  color: white;
+.hako-conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+}
+
+.hako-conversation-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hako-conversation-group__label {
+  padding: 0 2px;
+  color: rgba($text-main, 0.42);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hako-conversation-empty {
+  margin-bottom: 4px;
+  padding: 16px 14px;
+  border-radius: 16px;
+  border: 1px dashed rgba($surface-soft, 0.28);
+  background: rgba($surface-soft, 0.04);
+  color: rgba($text-main, 0.78);
+  animation: hakoSidebarFadeIn 260ms ease;
+}
+
+.hako-conversation-empty--search {
+  border-style: solid;
+  background: rgba($milk-cream, 0.58);
+}
+
+.hako-conversation-empty strong {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba($text-main, 0.88);
+  font-size: 13px;
+}
+
+.hako-conversation-empty p {
+  margin: 0;
+  color: rgba($text-main, 0.72);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.hako-conversation-empty__illustration {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: rgba($warm-shell, 0.34);
+  color: rgba($text-main, 0.72);
+  font-size: 16px;
+}
+
+.hako-conversation-item {
+  display: flex;
+  position: relative;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+  min-height: 54px;
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid rgba($warm-shell, 0.24);
+  background: rgba($surface-soft, 0.06);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 20px rgba($dusk-panel-deep, 0.06);
+  transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+
+  &:hover {
+    transform: translateY(-1px) scale(1.01);
+    background: rgba($milk-cream, 0.5);
+    border-color: rgba($warm-shell, 0.4);
+    box-shadow: 0 14px 28px rgba($dusk-panel-deep, 0.1);
+  }
+
+  &.is-active {
+    transform: translateX(4px) scale(1.01);
+    border-color: rgba($primary, 0.36);
+    background: rgba($milk-cream, 0.8);
+    box-shadow: inset 0 0 0 1px rgba($primary, 0.16), 0 10px 20px rgba($primary-dark, 0.06);
+  }
+}
+
+.hako-conversation-button {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  padding: 10px 44px 10px 12px;
+}
+
+.hako-conversation-title,
+.hako-conversation-summary,
+.hako-conversation-time,
+.hako-conversation-count,
+.hako-conversation-meta {
+  display: block;
+}
+
+.hako-conversation-title {
+  color: rgba($text-main, 0.96);
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hako-conversation-summary {
+  margin-top: 5px;
+  color: rgba($text-main, 0.84);
+  font-size: 11px;
+  line-height: 1.45;
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hako-conversation-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hako-conversation-count {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba($warm-shell, 0.3);
+  color: rgba($text-main, 0.74);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.hako-conversation-time {
+  color: rgba($text-main, 0.76);
+  font-size: 11px;
+}
+
+.hako-conversation-delete {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 999px;
+  background: rgba($milk-cream, 0.72);
+  color: rgba($text-main, 0.72);
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.hako-conversation-delete:hover {
+  background: rgba($accent-coral-100, 0.2);
+  color: $text-main;
+  transform: translateY(-50%) scale(1.04);
+}
+
+.hako-conversation-badge {
+  position: absolute;
+  right: 42px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 3px 8px;
+  border: none;
+  border-radius: 999px;
+  background: rgba($warm-shell, 0.22);
+  color: rgba($text-main, 0.6);
+  font-size: 10px;
+}
+
+.hako-conversation-note {
+  margin: 0;
+  color: rgba($text-main, 0.64);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+// 聊天內容
+.hako-cabin-main {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 8px 8px;
+  border-radius: 28px;
+  background: rgba($surface-soft, 0.32);
+}
+
+.hako-cabin-header {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.hako-cabin-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hako-cabin-name {
+  color: $text-main;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.hako-cabin-tag {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba($warm-shell, 0.18);
+  background-color: rgba($warm-shell, 0.42);
+  color: rgba($text-main, 0.92);
+  font-size: 12px;
+}
+
+.hako-cabin-subtitle {
+  margin-top: 8px;
+  max-width: 560px;
+  color: rgba($text-main, 0.9);
+  line-height: 1.7;
+}
+
+.hako-cabin-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.hako-cabin-conversation {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 16px;
+  border-radius: 30px;
+  border: 1px solid rgba($warm-shell, 0.22);
+  background: rgba($surface-soft, 0.56);
+  backdrop-filter: blur(10px);
+}
+
+.hako-cabin-conversation::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: 104px;
+  left: 18px;
+  height: 36px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba($surface-soft, 0), rgba($surface-soft, 0.34));
+}
+
+.hako-chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 8px;
+  padding: 4px 6px 6px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+.hako-chat-welcome {
+  padding: 18px 18px 16px;
+  border-radius: 24px;
+  border: 1px solid rgba($warm-shell, 0.18);
+  background: $hako-welcome-gradient;
+  box-shadow: inset 0 1px 0 rgba($surface-soft, 0.7);
+}
+
+.hako-chat-welcome__eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba($warm-shell, 0.42);
+  color: rgba($text-main, 0.62);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.hako-chat-welcome strong {
+  display: block;
+  margin-bottom: 7px;
+  color: $text-main;
+  font-size: 18px;
+}
+
+.hako-chat-welcome p {
+  margin: 0;
+  color: rgba($text-main, 0.88);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.hako-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  &--user {
+    flex-direction: row-reverse;
+
+    .hako-bubble {
+      background: $hako-user-bubble-gradient;
+      border: 1px solid rgba($warm-shell, 0.22);
+      border-radius: 16px 4px 16px 16px;
+      box-shadow: 0 14px 26px rgba($accent-mist-700, 0.08);
+    }
+  }
+
+  &--assistant {
+    .hako-bubble {
+      background: $hako-assistant-bubble-gradient;
+      border: 1px solid rgba($warm-shell, 0.16);
+      border-radius: 4px 16px 16px 16px;
+      box-shadow: 0 10px 22px rgba($accent-mist-700, 0.07);
+    }
+  }
+}
+
+.hako-message-intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.hako-message-intro-layout .hako-message {
+  min-width: 0;
+}
+
+.hako-avatar {
+  flex-shrink: 0;
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.hako-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.hako-message--user .hako-bubble-wrapper {
+  align-items: flex-end;
+}
+
+.hako-bubble-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba($warm-shell, 0.34);
+  color: rgba($text-main, 0.64);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.hako-bubble-marker::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba($primary-soft, 0.82);
+  box-shadow: 0 0 0 3px rgba($surface-soft, 0.06);
+}
+
+.hako-bubble {
+  max-width: min(78%, 680px);
+  padding: 12px 16px;
+  color: rgba($text-main, 0.94);
+  font-size: 15px;
+  line-height: 1.75;
+  backdrop-filter: blur(14px);
+
+  &--loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba($text-main, 0.72);
+    font-style: italic;
+  }
+}
+
+.hako-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hako-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba($primary-dark, 0.48);
+  animation: hakoTypingDot 1.1s ease-in-out infinite;
+}
+
+.hako-typing span:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.hako-typing span:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.hako-timestamp {
+  color: rgba($text-main, 0.62);
+  font-size: 11px;
+}
+
+.hako-quick-prompts {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 14px 16px 16px;
+  border: 1px solid rgba($warm-shell, 0.22);
+  border-radius: 22px;
+  background: rgba($milk-cream, 0.88);
+  box-shadow: 0 12px 24px rgba($dusk-panel-deep, 0.06);
+  z-index: 2;
+}
+
+.hako-quick-label {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba($text-main, 0.78);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.hako-quick-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hako-quick-button {
+  border: 1px solid rgba($warm-shell, 0.24);
+  border-radius: 18px;
+  padding: 10px 14px;
+  background: rgba($surface-soft, 0.92);
+  color: $text-main;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.hako-quick-button:hover {
+  transform: translateY(-1px);
+  background: rgba($milk-cream, 0.96);
+  box-shadow: none;
+}
+
+.hako-chat-input {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-top: auto;
+  flex-shrink: 0;
+  padding: 10px;
+  border-radius: 30px;
+  border: 1px solid rgba($warm-shell, 0.28);
+  background: rgba($surface-soft, 0.86);
+  box-shadow: 0 -14px 28px rgba($dusk-panel-deep, 0.06);
+}
+
+.hako-chat-textarea {
+  width: 100%;
+  min-height: 64px;
+  padding: 16px 18px;
+  border: 1px solid rgba($warm-shell, 0.18);
+  border-radius: 28px;
+  background: rgba($milk-cream, 0.8);
+  color: $text-main;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.hako-chat-textarea::placeholder {
+  color: rgba($text-main, 0.52);
+}
+
+.hako-chat-send-btn {
+  margin-top: 0;
+  min-width: 112px;
+  height: 56px;
+  padding: 0 22px;
+  border: 1px solid rgba($primary, 0.22);
+  border-radius: 999px;
+  background: rgba($primary, 0.9);
+  color: $surface-soft;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  animation: hakoInputPulse 3.2s ease-in-out infinite;
+}
+
+.hako-chat-send-btn:hover {
+  background: rgba($primary-dark, 0.92);
+}
+
+// 響應式
+@media (min-width: 768px) {
+  .hako-cabin-shell {
+    --hako-cabin-bg-image: url("../../../assets/scenes/cabin/cabin-tablet.png");
+    --hako-cabin-bg-size: 136% auto;
+    --hako-cabin-bg-position: center top;
+    --hako-cabin-overlay-opacity: 0.18;
+  }
+}
+
+@media (min-width: 1180px) {
+  .hako-cabin-shell {
+    --hako-cabin-bg-image: url("../../../assets/scenes/cabin/cabin-desktop.png");
+    --hako-cabin-bg-size: 100% auto;
+    --hako-cabin-bg-position: center top;
+    --hako-cabin-overlay-opacity: 0.14;
+  }
+}
+
+@media (max-width: 768px) {
+  .hako-cabin--modal {
+    top: 80px;
+    bottom: 16px;
+    width: min(calc(100% - 32px), 960px);
+  }
+
+  .hako-cabin-modal-body {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hako-cabin-workspace {
+    padding: 84px 16px 56px;
+  }
+
+  .hako-cabin-intro {
+    min-height: min(640px, calc(100dvh - 170px));
+    flex-direction: column;
+  }
+
+  .hako-cabin-intro__bubble {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, 420px);
+  }
+
+  .hako-cabin-intro__bubble::after {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -10px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .hako-cabin-hero {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+    width: min(100%, 520px);
+    min-height: 420px;
+  }
+
+  .hako-cabin-hero__image {
+    width: min(420px, 78vw);
+  }
+
+  .hako-cabin-modal-body {
+    grid-template-columns: 1fr;
+  }
+
+  .hako-cabin-main {
+    padding: 0;
+    background: transparent;
+  }
+
+  .hako-quick-prompts {
+    position: relative;
+    top: auto;
+    width: 100%;
+  }
+
+  .hako-quick-label {
+    text-align: left;
+  }
+}
+
+@media (max-width: 900px) {
+  .hako-message-intro-layout {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .hako-cabin-shell {
+    --hako-cabin-bg-size: 220% auto;
+    --hako-cabin-overlay-opacity: 0.48;
+  }
+
+  .hako-cabin-shell::after {
+    inset: 68px 14px 0;
+  }
+
+  .hako-history-drawer {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    transform: translateX(calc(-100% - 24px));
+  }
+
+  .hako-cabin--modal {
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    transform: none;
+  }
+
+  .hako-cabin-intro__bubble {
+    max-width: min(100%, 420px);
+    padding: 18px;
+  }
+
+  .hako-cabin-intro__bubble p {
+    font-size: 16px;
+  }
+
+  .hako-sidebar-top,
+  .hako-sidebar-body,
+  .hako-sidebar-footer {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .hako-conversation-badge {
+    right: 38px;
+  }
+
+  .hako-cabin-header {
+    flex-direction: column;
+  }
+
+  .hako-chat-input {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 24px;
+  }
+
+  .hako-chat-send-btn {
+    width: 100%;
+  }
+
+  .hako-cabin-hero {
+    min-height: 300px;
+  }
+
+  .hako-cabin-hero__image {
+    width: min(300px, 68vw);
+  }
+}
+
+@keyframes hakoInputPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba($surface-soft, 0.08);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba($surface-soft, 0.02);
+  }
+}
+
+@keyframes hakoTypingDot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+
+  40% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+@keyframes hakoSidebarFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

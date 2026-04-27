@@ -1,7 +1,7 @@
-import DiaryView from "./components/DiaryView";
+import HakoChatView from "./components/HakoChatView";
 
 function HakoCabinPage() {
-  return <DiaryView />;
+  return <HakoChatView />;
 }
 
 export default HakoCabinPage;

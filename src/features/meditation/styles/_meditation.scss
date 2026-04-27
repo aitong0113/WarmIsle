@@ -1,0 +1,292 @@
+@use "../../../styles/variables" as *;
+
+.meditation-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 40px 16px 32px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, $surface-muted 0%, $milk-cream 44%, $surface-soft 100%);
+}
+
+.meditation-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.meditation-scene__sun,
+.meditation-scene__ring {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.meditation-scene__sun {
+  top: 56px;
+  right: 8%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, $feature-meditation-sun-core 0%, $feature-meditation-sun-halo 68%, transparent 72%);
+}
+
+.meditation-scene__ring {
+  left: 50%;
+  top: 220px;
+  transform: translateX(-50%);
+  border: 1px solid $feature-meditation-ring;
+}
+
+.meditation-scene__ring--one {
+  width: 520px;
+  height: 520px;
+}
+
+.meditation-scene__ring--two {
+  width: 720px;
+  height: 720px;
+  top: 160px;
+}
+
+.meditation-layout {
+  width: 100%;
+  max-width: 1120px;
+  position: relative;
+  z-index: 1;
+}
+
+.meditation-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.meditation-header__eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $ocean-deep;
+}
+
+.meditation-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.meditation-subtitle {
+  font-size: 16px;
+  color: $text-soft;
+}
+
+.meditation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.meditation-card {
+  position: relative;
+  border: none;
+  border-radius: 24px;
+  padding: 24px 24px 20px;
+  text-align: left;
+  color: $text-main;
+  cursor: pointer;
+  border: 1px solid rgba($surface-soft, 0.46);
+  box-shadow: 0 16px 34px rgba($ocean-deep, 0.12);
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.meditation-card:focus-visible {
+  outline: 2px solid rgba($primary-soft, 0.88);
+  outline-offset: 2px;
+}
+
+.meditation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba($ocean-deep, 0.16);
+  filter: brightness(1.01);
+}
+
+.meditation-card--blue {
+  background: $feature-meditation-blue-card;
+}
+
+.meditation-card--purple {
+  background: $feature-meditation-purple-card;
+}
+
+.meditation-card--green {
+  background: $feature-meditation-green-card;
+}
+
+.meditation-card--orange {
+  background: $feature-meditation-orange-card;
+}
+
+.meditation-card-headline {
+  margin-bottom: 12px;
+}
+
+.meditation-card-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.meditation-card-description {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.meditation-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.meditation-card-duration {
+  font-weight: 600;
+}
+
+.meditation-card-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: rgba($surface-soft, 0.6);
+  color: rgba($text-main, 0.64);
+  font-size: 16px;
+}
+
+/* Detail / timer screen */
+
+.meditation-detail {
+  width: 100%;
+  max-width: 960px;
+  position: relative;
+  z-index: 1;
+}
+
+.meditation-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.meditation-back-btn {
+  border: none;
+  background: none;
+  padding: 8px 0;
+  font-size: 14px;
+  color: $text-soft;
+  cursor: pointer;
+}
+
+.meditation-back-btn:hover {
+  color: $text-main;
+}
+
+.meditation-detail-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.meditation-detail-label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $text-faint;
+  margin-bottom: 4px;
+}
+
+.meditation-detail-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.meditation-detail-description {
+  font-size: 14px;
+  color: $text-soft;
+}
+
+.meditation-timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meditation-circle {
+  width: min(360px, 80vw);
+  height: min(360px, 80vw);
+  border-radius: 999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $surface-soft;
+  box-shadow: 0 26px 70px rgba(101, 119, 142, 0.24);
+  margin-bottom: 24px;
+}
+
+.meditation-circle--blue {
+  background: $feature-meditation-blue-circle;
+}
+
+.meditation-circle--purple {
+  background: $feature-meditation-purple-circle;
+}
+
+.meditation-circle--green {
+  background: $feature-meditation-green-circle;
+}
+
+.meditation-circle--orange {
+  background: $feature-meditation-orange-circle;
+}
+
+.meditation-circle-label {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.meditation-circle-time {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.meditation-timer-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.meditation-action-primary,
+.meditation-action-secondary {
+  min-width: 120px;
+}
+
+.meditation-finished-text {
+  margin-top: 16px;
+  font-size: 14px;
+  color: $text-soft;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .meditation-page {
+    padding-top: 24px;
+  }
+
+  .meditation-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

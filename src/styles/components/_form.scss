@@ -1,0 +1,26 @@
+@use "../variables" as *;
+
+.field {
+  margin-bottom: $space-md;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: $space-sm;
+  border-radius: $radius-sm;
+  border: 1px solid $state-border-subtle;
+  background: rgba($surface-elevated, 0.92);
+  color: $text-main;
+  margin: $space-sm 0 $space-md;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: $state-active-border;
+    box-shadow: $state-focus-ring;
+  }
+}

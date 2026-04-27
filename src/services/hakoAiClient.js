@@ -1,59 +1,57 @@
 import { supabase } from "./supabaseClient";
 
-const HAKO_AI_ENDPOINT = import.meta.env.VITE_HAKO_AI_ENDPOINT;
+function normalizeHakoMessages(messages) {
+  const normalized = (messages || [])
+    .filter((message) => typeof message?.content === "string" && message.content.trim())
+    .map((message) => ({
+      role: message.role === "assistant" ? "assistant" : "user",
+      content: message.content.trim(),
+    }));
 
-/**
- * 對後端的「AI 哈可」端點發送事件，期待回傳 { message: string }。
- *
- * 優先透過 supabase.functions.invoke 呼叫 Edge Function，
- * 讓 Supabase 幫忙處理 CORS / Auth；若 supabase client 不存在，
- * 才退回使用環境變數中的直連 HTTP 端點。
- */
-export async function fetchHakoAiReply(event) {
-  // 1. 優先使用 supabase-js 內建的 Edge Function 呼叫
-  if (supabase) {
-    try {
-      const { data, error } = await supabase.functions.invoke("hako-ai", {
-        body: event,
-      });
-
-      if (error) {
-        console.warn("Failed to invoke hako-ai function", error);
-        // 繼續嘗試 fallback，而不是直接中斷
-      } else if (data && typeof data.message === "string") {
-        return data.message;
-      }
-    } catch (error) {
-      console.warn("Error while invoking hako-ai via supabase", error);
-      // 繼續嘗試 fallback
-    }
+  while (normalized.length > 0 && normalized[0].role !== "user") {
+    normalized.shift();
   }
 
-  // 2. 若 supabase client 不可用或失敗，再嘗試直連 Edge Function URL
-  if (!HAKO_AI_ENDPOINT) return null;
+  return normalized.slice(-12);
+}
+
+export async function fetchHakoAiReply(messages) {
+  if (!supabase) {
+    console.warn("Supabase client not initialized");
+    return null;
+  }
+
+  const { data: { session } } = await supabase.auth.getSession();
+  const normalizedMessages = normalizeHakoMessages(messages);
+
+  if (!normalizedMessages.length) {
+    return "哈可還在等你開口，先跟我說一句現在最明顯的感覺就可以。";
+  }
 
   try {
-    const res = await fetch(HAKO_AI_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
+    const invokeOptions = {
+      body: { messages: normalizedMessages },
+    };
 
-    if (!res.ok) {
-      console.warn("Hako AI endpoint returned non-ok status", res.status);
-      return null;
+    if (session?.access_token) {
+      invokeOptions.headers = {
+        Authorization: `Bearer ${session.access_token}`,
+      };
     }
 
-    const data = await res.json();
-    if (data && typeof data.message === "string") {
-      return data.message;
+    const { data, error } = await supabase.functions.invoke("hako-ai", invokeOptions);
+
+    if (error) {
+      console.warn("Hako AI invoke error", error);
+      // 即使 Edge Function 回傳 401/5xx，也給一段溫柔的 fallback 文案
+      return "哈可現在有點連不上雲端，不過我還是在這裡陪你。";
     }
 
-    return null;
-  } catch (error) {
-    console.warn("Failed to fetch Hako AI reply via direct endpoint", error);
-    return null;
+    return typeof data?.message === "string"
+      ? data.message
+      : "哈可正在想怎麼說，但我會在這裡陪著你。";
+  } catch (err) {
+    console.warn("Failed to fetch Hako AI reply", err);
+    return "哈可剛剛有點當機，不過你願意停下來看看自己的心，已經很棒了。";
   }
 }

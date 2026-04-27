@@ -1,0 +1,43 @@
+@use "./variables" as *;
+
+:root {
+  --font-body: "M PLUS Rounded 1c", "Noto Sans TC", sans-serif;
+  --font-display: "M PLUS Rounded 1c", "Noto Sans TC", sans-serif;
+  --font-brand: "M PLUS Rounded 1c", "Noto Sans TC", sans-serif;
+}
+
+/* =========================
+   TYPOGRAPHY SCALE
+========================= */
+
+.heading-2,
+.heading-3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+}
+
+.heading-2 {
+  font-size: 24px;
+  line-height: 1.5;
+  margin-bottom: $space-sm;
+}
+
+.heading-3 {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: $space-sm;
+}
+
+.text-body {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.text-muted {
+  color: $text-soft;
+}
+
+.text-caption {
+  font-size: 12px;
+  line-height: 1.6;
+}
