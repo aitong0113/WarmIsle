@@ -53,7 +53,6 @@ function IslandWorld() {
     handleSaveTodayNote,
     handleSelectTodayEmotion,
   } = useHomeCenterData();
-
   useEffect(() => {
     if (activeQuickPanel !== "journal") return;
 
@@ -228,6 +227,30 @@ function IslandWorld() {
             const ActionIcon = QUICK_ICON_BY_ID[action.id] || action.icon;
             const isActive = activeQuickPanel === action.id;
 
+            // 哈可導引內容
+            let hakoHover, hakoClick;
+            switch (action.id) {
+              case "intro":
+                hakoHover = "回到最初的陪伴對話，重新認識暖心島。";
+                hakoClick = "我帶你回入口，重新走一次陪伴對話。";
+                break;
+              case "today":
+                hakoHover = "快速記錄今天的情緒和一句話，幫自己留下一個小註記。";
+                hakoClick = "來記錄今天的情緒和一句話吧。";
+                break;
+              case "journal":
+                hakoHover = "打開心情月曆，回顧每一天的感受與紀錄。";
+                hakoClick = "我們一起來看看你的心情月曆。";
+                break;
+              case "status":
+                hakoHover = "檢視最近的情緒狀態和統計，了解自己的變化。";
+                hakoClick = "這裡可以快速檢視你的狀態統計。";
+                break;
+              default:
+                hakoHover = undefined;
+                hakoClick = undefined;
+            }
+
             return (
               <button
                 key={action.id}
@@ -236,6 +259,10 @@ function IslandWorld() {
                 onClick={() => setActiveQuickPanel((current) => (current === action.id ? "" : action.id))}
                 aria-pressed={isActive}
                 aria-label={action.label}
+                data-hako-target={action.path}
+                data-hako-hover={hakoHover}
+                data-hako-click={hakoClick}
+                data-hako-priority="primary"
               >
                 <ActionIcon aria-hidden="true" />
               </button>

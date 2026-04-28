@@ -171,6 +171,7 @@ function MemberCenterPage() {
                   type="button"
                   className="btn btn-soft member-plan-card__cta"
                   disabled
+                  data-hako-target="/account"
                   data-hako-hover="你現在就在免費方案，先把核心體驗走一輪也很好。"
                 >
                   {plan.ctaLabel}

@@ -14,7 +14,6 @@ function HomeCenterTodayPage() {
     todayNoteDraft,
     setTodayNoteDraft,
   } = useHomeCenterData();
-
   return (
     <HomeCenterShell
       pageId={page.id}

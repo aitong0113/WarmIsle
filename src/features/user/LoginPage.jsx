@@ -108,6 +108,7 @@ function LoginPage() {
             className="btn btn-soft"
             onClick={() => setMode("login")}
             style={{ opacity: mode === "login" ? 1 : 0.6 }}
+            data-hako-target="/login"
             data-hako-priority="primary"
             data-hako-hover="如果你已經有帳號，就從這裡登入回到島上。"
             data-hako-click="好，我們用登入模式。"
@@ -119,6 +120,7 @@ function LoginPage() {
             className="btn btn-soft"
             onClick={() => setMode("signup")}
             style={{ opacity: mode === "signup" ? 1 : 0.6 }}
+            data-hako-target="/login"
             data-hako-priority="primary"
             data-hako-hover="如果你還沒有帳號，可以先在這裡註冊。"
             data-hako-click="那我們改成註冊模式。"
@@ -166,6 +168,7 @@ function LoginPage() {
             type="submit"
             className="btn"
             disabled={loading}
+            data-hako-target="/login"
             data-hako-priority="primary"
             data-hako-hover={mode === "login" ? "按下去就會用這組帳密登入。" : "按下去就會用這組資料建立新帳號。"}
             data-hako-click={mode === "login" ? "我先幫你送出登入。" : "我先幫你送出註冊。"}
@@ -193,6 +196,7 @@ function LoginPage() {
             type="button"
             className="btn btn-soft"
             onClick={handleGoogleSignIn}
+            data-hako-target="/login"
             data-hako-priority="primary"
             data-hako-hover="如果你想快一點登入，Google 一鍵登入會比較省事。"
             data-hako-click="我們改走 Google 登入。"

@@ -1,9 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { loadResources, fetchResources } from "@/services/resourceService";
+import useEmotionGuide from "@/features/guidance/useEmotionGuide";
 
 function LighthouseView() {
+  const location = useLocation();
   const [resources, setResources] = useState(loadResources());
   const [loading, setLoading] = useState(true);
+  const guide = useEmotionGuide();
 
   useEffect(() => {
     let isMounted = true;
@@ -30,6 +34,16 @@ function LighthouseView() {
   const [city, setCity] = useState("all");
   const [type, setType] = useState("all");
   const [price, setPrice] = useState("all"); // all | free
+  const crisisPlan = location.state?.crisisPlan || (guide?.state === "help" ? guide.crisisPlan : null);
+
+  useEffect(() => {
+    if (!crisisPlan) return;
+
+    if (crisisPlan.riskLevel === "urgent" || crisisPlan.riskLevel === "high") {
+      setType("support");
+      setPrice("free");
+    }
+  }, [crisisPlan]);
 
   const cities = useMemo(() => {
     const set = new Set();
@@ -88,6 +102,30 @@ function LighthouseView() {
           這裡放著一些在需要時可以求助的資源，可以依縣市、類型或關鍵字查找。
         </p>
       </header>
+
+      {crisisPlan && (
+        <section className={`lighthouse-crisis lighthouse-crisis--${crisisPlan.riskLevel}`} aria-label="危機提示與資源引導">
+          <div className="lighthouse-crisis__copy">
+            <p className="lighthouse-crisis__eyebrow">先做最重要的事</p>
+            <h2>{crisisPlan.alertTitle}</h2>
+            <p>{crisisPlan.alertBody}</p>
+            <ul className="lighthouse-crisis__steps">
+              {crisisPlan.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lighthouse-crisis__actions">
+            {crisisPlan.contacts.map((contact) => (
+              <a key={contact.id} className="btn btn-soft lighthouse-crisis__action" href={contact.href}>
+                <strong>{contact.label}</strong>
+                <span>{contact.description}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="lighthouse-filters">
         <input

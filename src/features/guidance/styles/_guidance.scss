@@ -1,0 +1,144 @@
+@use "../../../styles/variables" as *;
+
+.emotion-guide-card {
+  display: grid;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 245, 0.96) 0%, rgba(240, 247, 247, 0.96) 100%),
+    rgba($surface-soft, 0.96);
+  border: 1px solid rgba($mist-blue, 0.62);
+  box-shadow: 0 18px 32px rgba($primary-dark, 0.08);
+}
+
+.emotion-guide-card--compact {
+  padding: 16px 18px;
+}
+
+.emotion-guide-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.emotion-guide-card__eyebrow {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba($primary-dark, 0.7);
+}
+
+.emotion-guide-card__header h3,
+.emotion-guide-card__lead,
+.emotion-guide-card__companion,
+.emotion-guide-card__action span {
+  margin: 0;
+}
+
+.emotion-guide-card__header h3 {
+  font-size: clamp(20px, 2.6vw, 24px);
+  line-height: 1.25;
+  color: $text-main;
+}
+
+.emotion-guide-card__lead,
+.emotion-guide-card__companion {
+  line-height: 1.7;
+  color: rgba($text-main, 0.82);
+}
+
+.emotion-guide-card__companion {
+  color: rgba($primary-dark, 0.8);
+}
+
+.emotion-guide-card__state {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: rgba($surface-elevated, 0.84);
+  color: rgba($primary-dark, 0.78);
+}
+
+.emotion-guide-card__state--rest {
+  background: rgba(247, 198, 168, 0.28);
+}
+
+.emotion-guide-card__state--calm {
+  background: rgba(155, 204, 216, 0.28);
+}
+
+.emotion-guide-card__state--talk {
+  background: rgba(183, 211, 169, 0.32);
+}
+
+.emotion-guide-card__state--help {
+  background: rgba(229, 162, 153, 0.3);
+}
+
+.emotion-guide-card__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.emotion-guide-card__action {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba($mist-blue, 0.48);
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.emotion-guide-card__action strong {
+  font-size: 15px;
+  color: $text-main;
+}
+
+.emotion-guide-card__action span {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba($text-main, 0.7);
+}
+
+button.emotion-guide-card__action {
+  cursor: pointer;
+}
+
+button.emotion-guide-card__action:hover,
+button.emotion-guide-card__action:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba($primary-dark, 0.08);
+  border-color: rgba($primary-dark, 0.26);
+}
+
+.emotion-guide-card__action--primary {
+  background: linear-gradient(180deg, rgba($surface-elevated, 0.98) 0%, rgba($warm-shell, 0.82) 100%);
+}
+
+.emotion-guide-card__action--secondary {
+  background: rgba($surface-elevated, 0.82);
+}
+
+@media (max-width: 720px) {
+  .emotion-guide-card__header {
+    flex-direction: column;
+  }
+
+  .emotion-guide-card__actions {
+    grid-template-columns: 1fr;
+  }
+}

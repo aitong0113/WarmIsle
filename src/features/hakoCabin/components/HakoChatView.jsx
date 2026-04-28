@@ -598,6 +598,7 @@ function HakoChatView() {
                   className="hako-chat-send-btn"
                   onClick={handleSend}
                   disabled={isLoading || isHistoryLoading}
+                  data-hako-target="/hako-cabin"
                   data-hako-priority="primary"
                   data-hako-hover="準備好就送出吧，我會先接住你剛剛寫下的內容。"
                   data-hako-click="我正在把你的話接過來，等一下就回你。"

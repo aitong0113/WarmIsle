@@ -67,6 +67,7 @@ function Header() {
         <Link
           to="/island"
           className="logo"
+          data-hako-target="/island"
           data-hako-priority="primary"
           data-hako-hover="這是暖心島的主標誌，按下去會回到整座島的地圖。"
           data-hako-click="我們先回到島中央。"
@@ -91,6 +92,7 @@ function Header() {
                 state={linkProps.state}
                 className={`nav-link${item.requiresPaid ? " nav-link--premium" : ""}${isLocked ? " is-locked" : ""}`}
                 aria-label={item.requiresPaid ? `${item.label}（付費功能）` : item.label}
+                data-hako-target={item.to}
                 data-hako-priority="primary"
                 data-hako-hover={getHoverMessageForItem(item)}
                 data-hako-click={item.clickMessage}
@@ -115,6 +117,7 @@ function Header() {
               <Link
                 to="/account"
                 className="nav-user nav-user-link"
+                data-hako-target="/account"
                 data-hako-priority="primary"
                 data-hako-hover={`這裡是你的會員中心入口，現在會用「${baseName}」這個名字跟你打招呼。`}
                 data-hako-click="我們去會員中心看看你的帳號狀態。"
@@ -135,6 +138,7 @@ function Header() {
             <Link
               to="/login"
               className="nav-cta"
+              data-hako-target="/login"
               data-hako-priority="primary"
               data-hako-hover="先登入之後，島上的紀錄和方案狀態才會跟著你。"
               data-hako-click="我們先去登入。"

@@ -1,0 +1,60 @@
+// 所有引導系統（哈可 companion）UI 參數統一於此
+@use "../../../styles/_variables.scss" as *;
+
+
+$accent-coral-700: #d96c4a;
+$accent-coral-500: #f7a299;
+$accent-coral-100: #fff1ec;
+$primary-dark: #a85b3b;
+$primary: #e6a07c;
+$surface-soft: #f9f6f3;
+$surface-elevated: #fff;
+$text-main: #4a3c32;
+$text-soft: #b8a89c;
+$warm-shell: #f7e3d3;
+$dusk-panel-deep: #2d2d2d;
+
+$hako-bubble-width: min(340px, calc(100vw - 28px));
+$hako-bubble-padding: 22px 20px 18px 20px;
+$hako-bubble-radius: 18px;
+$hako-bubble-bg: rgba($surface-soft, 0.98);
+$hako-bubble-shadow: 0 10px 32px rgba($dusk-panel-deep, 0.13);
+$hako-bubble-font-size: 14px;
+$hako-bubble-gap: 18px;
+
+$hako-badge-padding: 4px 10px;
+$hako-badge-radius: 999px;
+$hako-badge-font-size: 12px;
+$hako-badge-font-weight: 600;
+$hako-badge-color: $primary-dark;
+$hako-badge-bg: rgba($primary, 0.10);
+
+$hako-title-font-size: 16px;
+$hako-title-font-weight: 700;
+$hako-title-color: $text-main;
+
+$hako-copy-font-size: 14px;
+$hako-copy-color: $text-main;
+$hako-copy-line-height: 1.7;
+$hako-copy-soft-color: rgba($text-main, 0.54);
+$hako-copy-soft-font-size: 13px;
+
+$hako-action-padding: 12px 0;
+$hako-action-radius: 14px;
+$hako-action-bg: rgba($surface-elevated, 0.98);
+$hako-action-font-size: 15px;
+$hako-action-font-weight: 600;
+$hako-action-color: $text-main;
+$hako-action-primary-bg: linear-gradient(180deg, rgba($primary, 0.13), rgba($warm-shell, 0.13) 80%, rgba($surface-elevated, 0.98) 100%);
+$hako-action-primary-color: $primary-dark;
+$hako-action-primary-border: 1.5px solid rgba($primary, 0.18);
+
+$hako-crisis-padding: 14px 12px 12px 12px;
+$hako-crisis-radius: 16px;
+$hako-crisis-bg: rgba($accent-coral-100, 0.18);
+$hako-crisis-border: 1.5px solid rgba($accent-coral-500, 0.18);
+$hako-crisis-title-font-size: 15px;
+$hako-crisis-title-font-weight: 700;
+$hako-crisis-title-color: $accent-coral-700;
+$hako-crisis-body-font-size: 13.5px;
+$hako-crisis-body-color: $accent-coral-700;

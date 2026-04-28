@@ -129,6 +129,7 @@ function MeditationPage() {
                 type="button"
                 className={`meditation-card meditation-card--${practice.variant}`}
                 onClick={() => handleSelectPractice(practice)}
+                data-hako-target="/meditation"
                 data-hako-priority="primary"
                 data-hako-hover={`這一輪是${practice.minutes}分鐘的${practice.title}，適合先把注意力慢慢收回來。`}
                 data-hako-click={`我們先選${practice.title}，不用完美，只要願意開始就很好。`}
@@ -204,6 +205,7 @@ function MeditationPage() {
                 type="button"
                 className="btn btn-soft meditation-action-primary"
                 onClick={handleStartPause}
+                data-hako-target="/meditation"
                 data-hako-priority="primary"
                 data-hako-hover={isRunning ? "如果想先停一下，就按這裡喘口氣。" : "準備好之後，按下去就會開始這一輪練習。"}
                 data-hako-click={isRunning ? "我先陪你停一下，等呼吸穩了再繼續。" : status === "finished" ? "那我們再來一輪，這次更輕一點也可以。" : "開始了，我會在旁邊陪你把這幾分鐘走完。"}

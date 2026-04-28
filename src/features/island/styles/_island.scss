@@ -220,6 +220,14 @@ body:has(.app-main--island) {
   flex-wrap: wrap;
 }
 
+.island-world__guide-wrap {
+  margin-top: 16px;
+}
+
+.island-world__info-panel--guide {
+  width: min(440px, calc(100vw - 110px));
+}
+
 .island-world__bubble-feedback {
   margin-right: auto;
   color: rgba($primary-dark, 0.8);

@@ -14,6 +14,8 @@ import { EMOTION_OPTIONS } from "@/features/emotion/config/emotionOptions";
 import { getGuestUserId } from "@/services/guestUser";
 import { setUser } from "@/features/user/store/userSlice";
 import { addEmotionLog, setEmotion, setEmotionNote } from "@/features/emotion/store/emotionSlice";
+import EmotionGuideCard from "@/features/guidance/components/EmotionGuideCard";
+import { buildEmotionGuide } from "@/features/guidance/guideSystem";
 import { syncEmotionLogApi } from "@/services/emotionApi";
 import { todayLocalDate } from "@/utils/date";
 import { markEntrySeen } from "./entrySession";
@@ -49,6 +51,12 @@ function HomeEntryPage() {
   const activeMood = selectedMood || moodOptions.find((option) => option.key === "relaxed") || moodOptions[0];
   const trimmedName = name.trim();
   const trimmedIntroNote = introNote.trim();
+  const guide = selectedMood
+    ? buildEmotionGuide({
+        mood: selectedMood.emotionId,
+        content: trimmedIntroNote,
+      })
+    : null;
   const hasName = Boolean(trimmedName);
   const hasSelectedMood = Boolean(selectedMood);
   const displayName = hasName ? trimmedName : "旅人";
@@ -342,6 +350,18 @@ function HomeEntryPage() {
                   maxLength={100}
                   data-hako-hover="如果你想，這裡可以先留一句今天的心情；不寫也沒關係。"
                 />
+
+                {guide && (
+                  <div className="entry-panel__guide">
+                    <EmotionGuideCard
+                      guide={guide}
+                      compact
+                      interactive={false}
+                      title="我先幫你排好下一步"
+                      source="intro-guide"
+                    />
+                  </div>
+                )}
               </div>
             )}
 

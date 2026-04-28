@@ -220,6 +220,7 @@ function UpgradePage() {
                 role="tab"
                 aria-selected={selectedPlanId === plan.id}
                 tabIndex={selectedPlanId === plan.id ? 0 : -1}
+                data-hako-target="/upgrade"
                 data-hako-priority="primary"
                 data-hako-hover={`這是${plan.name}，${plan.helper}。`}
                 data-hako-click={`好，我們先選${plan.name}。`}
@@ -250,6 +251,7 @@ function UpgradePage() {
                   role="tab"
                   aria-selected={selectedProviderId === provider.id}
                   tabIndex={selectedProviderId === provider.id ? 0 : -1}
+                  data-hako-target="/upgrade"
                   data-hako-priority="primary"
                   data-hako-hover={provider.id === "stripe" ? "Stripe 適合信用卡和 Apple Pay。" : "LINE Pay 比較貼近台灣常用付款流程。"}
                   data-hako-click={provider.id === "stripe" ? "好，我們改用 Stripe 結帳。" : "好，我們改用 LINE Pay 結帳。"}
@@ -271,6 +273,7 @@ function UpgradePage() {
             className="btn upgrade-page__submit"
             disabled={user?.hasPaidAccess || isSubmitting}
             onClick={handleUpgrade}
+            data-hako-target="/upgrade"
             data-hako-priority="primary"
             data-hako-hover={user?.hasPaidAccess ? "你已經解鎖完成，不需要再結一次帳。" : `按下去就會前往${selectedProvider.name}完成這次付款。`}
             data-hako-click={user?.hasPaidAccess ? "你已經是付費用戶了。" : `好，我現在帶你去${selectedProvider.name}結帳。`}

@@ -1,4 +1,5 @@
 @use "../../../styles/variables" as *;
+@use "./_hako-guide-vars.scss" as *;
 
 .hako-companion {
   position: fixed;
@@ -6,15 +7,10 @@
   bottom: 44px;
   z-index: 40;
   pointer-events: none;
-
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
   gap: 6px;
-}
-
-body:has(.footer) .hako-companion {
-  bottom: 38px;
 }
 
 .hako-companion-avatar {
@@ -22,11 +18,14 @@ body:has(.footer) .hako-companion {
   height: 40px;
   border-radius: 999px;
   background: $surface-soft;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 25px rgba($dusk-panel-deep, 0.12);
   overflow: hidden;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .hako-companion-avatar img {
@@ -36,14 +35,139 @@ body:has(.footer) .hako-companion {
 }
 
 .hako-companion-bubble {
-  max-width: 184px;
-  padding: 9px 11px;
-  border-radius: 16px;
-  background: rgba($surface-soft, 0.96);
-  box-shadow: 0 10px 25px rgba($dusk-panel-deep, 0.12);
-  font-size: 13px;
+  width: $hako-bubble-width;
+  padding: $hako-bubble-padding;
+  border-radius: $hako-bubble-radius;
+  background: $hako-bubble-bg;
+  box-shadow: $hako-bubble-shadow;
+  font-size: $hako-bubble-font-size;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: $hako-bubble-gap;
 }
 
+.hako-companion.is-pinned .hako-companion-bubble {
+  pointer-events: auto;
+}
+
+.hako-companion-bubble__message,
+.hako-companion-guide__copy,
+.hako-companion-guide__hint,
+.hako-companion-crisis p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.hako-companion-guide {
+  display: flex;
+  flex-direction: column;
+  gap: $hako-bubble-gap;
+  margin-top: 0;
+}
+.hako-companion-guide__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
+  // 保證標籤與標題同列且不斷行
+}
+
+.hako-companion-guide__badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: $hako-badge-padding;
+  border-radius: $hako-badge-radius;
+  font-size: $hako-badge-font-size;
+  font-weight: $hako-badge-font-weight;
+  color: $hako-badge-color;
+  background: $hako-badge-bg;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.hako-companion-guide__badge--rest,
+.hako-companion-guide__badge--calm,
+.hako-companion-guide__badge--talk,
+.hako-companion-guide__badge--help {
+  background: $hako-badge-bg;
+}
+
+.hako-companion-guide__title {
+  font-size: $hako-title-font-size;
+  font-weight: $hako-title-font-weight;
+  color: $hako-title-color;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+.hako-companion-guide__desc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hako-companion-guide__copy {
+  margin: 0;
+  line-height: $hako-copy-line-height;
+  font-size: $hako-copy-font-size;
+  color: $hako-copy-color;
+}
+.hako-companion-guide__copy--soft,
+.hako-companion-guide__hint {
+  color: $hako-copy-soft-color;
+  font-size: $hako-copy-soft-font-size;
+}
+.hako-companion-guide__actions,
+.hako-companion-crisis__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+.hako-companion-guide__action,
+.hako-companion-crisis__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: $hako-action-padding;
+  border-radius: $hako-action-radius;
+  border: none;
+  background: $hako-action-bg;
+  color: $hako-action-color;
+  text-decoration: none;
+  font-size: $hako-action-font-size;
+  font-weight: $hako-action-font-weight;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.hako-companion-guide__action--primary {
+  background: $hako-action-primary-bg;
+  color: $hako-action-primary-color;
+  border: $hako-action-primary-border;
+}
+.hako-companion-crisis {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: $hako-crisis-padding;
+  border-radius: $hako-crisis-radius;
+  background: $hako-crisis-bg;
+  border: $hako-crisis-border;
+  margin-bottom: 2px;
+}
+.hako-companion-crisis__title {
+  font-size: $hako-crisis-title-font-size;
+  font-weight: $hako-crisis-title-font-weight;
+  color: $hako-crisis-title-color;
+  margin-bottom: 2px;
+}
+.hako-companion-crisis__body {
+  font-size: $hako-crisis-body-font-size;
+  color: $hako-crisis-body-color;
+  margin-bottom: 2px;
+}
+.hako-companion-crisis strong {
+  color: $text-main;
+}
 .hako-companion-close {
   background: none;
   border: none;
@@ -66,8 +190,8 @@ body:has(.footer) .hako-companion {
   }
 
   .hako-companion-bubble {
-    max-width: 148px;
-    padding: 7px 9px;
+    width: min(280px, calc(100vw - 20px));
+    padding: 10px;
     font-size: 12px;
     border-radius: 14px;
   }

@@ -77,6 +77,7 @@ function CampfirePage() {
                   type="button"
                   className="btn btn-soft"
                   onClick={() => setActiveId((prev) => (prev === item.id ? null : item.id))}
+                  data-hako-target="/campfire"
                   data-hako-priority="primary"
                   data-hako-hover={`這段${item.title}比較適合${item.mood}的時候，按下去就能先聽一會。`}
                   data-hako-click={activeId === item.id ? "好，我先幫你把這段聲音收起來。" : `先放這段${item.title}，讓環境先替你安靜一點。`}
