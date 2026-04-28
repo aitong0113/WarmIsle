@@ -23,6 +23,7 @@ body:has(.app-main--island) {
   overflow: hidden;
   box-shadow: none;
   background: linear-gradient(180deg, $sky-light 0%, $sky-mist 100%);
+  user-select: none;
 }
 
 .island-world__quick-shell {
@@ -78,11 +79,23 @@ body:has(.app-main--island) {
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($accent-coral-500, 0.72) rgba($surface-elevated, 0.42);
 }
 
 .island-world__info-panel::-webkit-scrollbar {
-  display: none;
+  width: 9px;
+}
+
+.island-world__info-panel::-webkit-scrollbar-track {
+  background: rgba($surface-elevated, 0.38);
+  border-radius: 999px;
+}
+
+.island-world__info-panel::-webkit-scrollbar-thumb {
+  background: rgba($accent-coral-500, 0.72);
+  border-radius: 999px;
+  border: 2px solid rgba($surface-elevated, 0.7);
 }
 
 .island-world__info-panel::before {
@@ -159,6 +172,11 @@ body:has(.app-main--island) {
   flex-wrap: wrap;
 }
 
+.island-world__bubble-current--inline {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
 .island-world__bubble-label {
   display: block;
   margin-bottom: 8px;
@@ -176,7 +194,7 @@ body:has(.app-main--island) {
 
 .island-world__note-input {
   width: 100%;
-  min-height: 108px;
+  min-height: 92px;
   padding: 12px 14px;
   border-radius: 16px;
   border: 1px solid rgba($primary, 0.16);
@@ -196,12 +214,14 @@ body:has(.app-main--island) {
 .island-world__bubble-actions {
   margin-top: 14px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: flex-end;
   gap: 12px;
   flex-wrap: wrap;
 }
 
 .island-world__bubble-feedback {
+  margin-right: auto;
   color: rgba($primary-dark, 0.8);
 }
 
@@ -241,6 +261,94 @@ body:has(.app-main--island) {
   color: $text-main;
 }
 
+.island-world__chart-card {
+  margin-top: 12px;
+  padding: 14px 16px 16px;
+  border-radius: 18px;
+  background: rgba($surface-elevated, 0.8);
+  border: 1px solid rgba($mist-blue, 0.46);
+}
+
+.island-world__chart-head {
+  margin-bottom: 12px;
+
+  strong {
+    display: block;
+    font-size: 16px;
+    color: $text-main;
+  }
+}
+
+.island-world__emotion-share-list {
+  display: grid;
+  gap: 10px;
+}
+
+.island-world__emotion-share-row {
+  display: grid;
+  grid-template-columns: minmax(100px, 120px) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.island-world__emotion-share-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba($text-main, 0.88);
+}
+
+.island-world__emotion-share-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.island-world__emotion-share-track {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba($primary-mist, 0.22);
+  overflow: hidden;
+}
+
+.island-world__emotion-share-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba($primary-soft, 0.92) 0%, rgba($primary, 0.72) 100%);
+}
+
+.island-world__emotion-share-stats {
+  min-width: 64px;
+  text-align: right;
+
+  strong,
+  span {
+    display: block;
+  }
+
+  strong {
+    font-size: 13px;
+    color: $text-main;
+  }
+
+  span {
+    font-size: 11px;
+    color: rgba($text-main, 0.58);
+  }
+}
+
+.island-world__chart-empty {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba($text-main, 0.64);
+}
+
 .island-world__bubble-note-preview {
   margin-top: 12px;
 }
@@ -266,10 +374,14 @@ body:has(.app-main--island) {
   filter: none;
   transform: none;
   opacity: 1;
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 .island-world__map {
   display: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 .island-world__veil {

@@ -6,6 +6,9 @@ function HomeCenterStatusPage() {
   const page = getHomeCenterPage("status");
   const {
     monthEntriesCount,
+    emotionMetaById,
+    recentChartDays,
+    recentDisplayNote,
     recentEmotionMeta,
     recentLog,
     streakInfo,
@@ -40,9 +43,44 @@ function HomeCenterStatusPage() {
           </div>
         </div>
 
+        <div className="home-center-chart-card">
+          <div className="home-center-chart-card__header">
+            <div>
+              <span className="home-center-card__label">最近 7 天節奏</span>
+              <strong>情緒小波形</strong>
+            </div>
+            <p>把這週的心情起伏收成一張小圖。</p>
+          </div>
+
+          <div className="home-center-mini-chart" aria-label="最近七天情緒統計圖">
+            {recentChartDays.map((day) => {
+              const emotionMeta = day.emotionId ? emotionMetaById[day.emotionId] : null;
+
+              return (
+                <div key={day.date} className={`home-center-mini-chart__day${day.isToday ? " is-today" : ""}`}>
+                  <div className="home-center-mini-chart__stamp" aria-hidden="true">
+                    {emotionMeta?.iconSrc ? (
+                      <img src={emotionMeta.iconSrc} alt="" className="home-center-mini-chart__stamp-icon" />
+                    ) : (
+                      <span className="home-center-mini-chart__stamp-dot" />
+                    )}
+                  </div>
+                  <div className="home-center-mini-chart__bar-track">
+                    <div
+                      className={`home-center-mini-chart__bar${day.level > 0 ? " has-value" : ""}`}
+                      style={{ height: `${Math.max(day.level, 1) * 18}%` }}
+                    />
+                  </div>
+                  <span className="home-center-mini-chart__weekday">{day.weekday}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="home-center-note-card">
           <span className="home-center-card__label">最近一句話</span>
-          <p>{todayLog?.note || recentLog?.note || "你還沒有留下短日記，今天可以從一句話開始。"}</p>
+          <p>{recentDisplayNote || "你還沒有留下短日記，今天可以從一句話開始。"}</p>
         </div>
       </article>
     </HomeCenterShell>

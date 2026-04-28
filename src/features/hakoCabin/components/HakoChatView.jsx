@@ -322,6 +322,14 @@ function HakoChatView() {
     <section className="hako-cabin-shell">
       <div className="hako-cabin-workspace">
         <div className="hako-cabin-intro">
+          <header className="hako-cabin-page-header" aria-label="哈可小屋介紹">
+            <p className="hako-cabin-page-header__eyebrow">Hako Cabin</p>
+            <h1>哈可小屋</h1>
+            <p className="hako-cabin-page-header__subtitle">
+              哈可會陪你把還沒整理好的心情，一句一句接住
+            </p>
+          </header>
+
           <div className="hako-cabin-intro__bubble" role="dialog" aria-label="哈可招呼語">
             <span className="hako-cabin-intro__eyebrow">哈可正在這裡等你</span>
             <p>{introMessage}</p>

@@ -5,6 +5,15 @@
 ========================= */
 
 body {
+  --scenic-header-top: 14px;
+  --scenic-header-space: 108px;
+  --scenic-content-start: 104px;
+  --feature-title-main-offset: 64px;
+  --feature-page-top-space: 32px;
+  --feature-hero-gap: 24px;
+  --feature-hero-pad-block: 30px;
+  --feature-scene-hero-top: 148px;
+  --feature-scene-hero-bottom: 64px;
   --brand-title-color: #{$text-main};
   --brand-subtitle-color: #{$text-soft};
 
@@ -34,7 +43,7 @@ body {
 }
 
 .app-main--scenic {
-  padding-top: 108px;
+  padding-top: var(--scenic-content-start);
 }
 
 .app-main--scenic.app-main--island {
@@ -110,11 +119,10 @@ body:has(.app-main--hako-cabin) {
 ========================= */
 
 .container {
-  max-width: 1200px;
-
-  margin: auto;
-
-  padding: $space-lg;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: $space-lg 24px;
 }
 
 
@@ -157,17 +165,23 @@ body:has(.app-main--hako-cabin) {
 
 body:has(.app-main--scenic) .header {
   position: fixed;
-  top: 14px;
-  left: 50%;
+  top: var(--scenic-header-top);
+  left: max(20px, calc(50vw - 580px));
   right: auto;
-  width: min(calc(100% - 40px), 1160px);
-  transform: translateX(-50%);
+  width: min(calc(100vw - 40px), 1160px);
+  transform: none;
   background: rgba($surface-elevated, 0.96);
   box-shadow: 0 10px 24px rgba(47, 63, 83, 0.08);
   border: 1px solid rgba($primary-soft, 0.22);
   border-radius: 26px;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+}
+
+body:has(.app-main--hako-cabin) .header {
+  background: rgba($surface-elevated, 0.82);
+  box-shadow: 0 8px 20px rgba(47, 63, 83, 0.05);
+  border-color: rgba($primary-soft, 0.16);
 }
 
 .header-inner {
@@ -432,7 +446,9 @@ body:has(.app-main--scenic) .logo-copy__subtitle {
 @media (max-width: 900px) {
   body:has(.app-main--scenic) .header {
     top: 10px;
-    width: calc(100% - 20px);
+    left: 10px;
+    right: auto;
+    width: calc(100vw - 20px);
     border-radius: 22px;
   }
 
@@ -534,8 +550,20 @@ body:has(.hako-cabin--modal) .footer {
 ========================= */
 
 @media (max-width: 768px) {
+  body {
+    --scenic-header-top: 10px;
+    --scenic-header-space: 120px;
+    --scenic-content-start: 100px;
+    --feature-title-main-offset: 56px;
+    --feature-page-top-space: 24px;
+    --feature-hero-gap: 20px;
+    --feature-hero-pad-block: 24px;
+    --feature-scene-hero-top: 136px;
+    --feature-scene-hero-bottom: 52px;
+  }
+
   .app-main--scenic {
-    padding-top: 120px;
+    padding-top: var(--scenic-header-space);
   }
 
   .app-main--scenic.app-main--island {

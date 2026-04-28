@@ -57,22 +57,16 @@ function EmotionCalendarWidget({
       <BaseDayButton {...props} ref={ref} className={dayButtonClassName}>
         <span className="emotion-calendar-widget__day-topline">
           <span className="emotion-calendar-widget__day-dateblock">
-            {props.modifiers.today ? <span className="emotion-calendar-widget__today-badge">今天</span> : null}
             <span className="emotion-calendar-widget__day-number">{props.children}</span>
           </span>
-          <span className="emotion-calendar-widget__day-emotion" aria-hidden="true">
-            {emotionMeta?.iconSrc ? (
+          {emotionMeta?.iconSrc ? (
+            <span className="emotion-calendar-widget__day-emotion" aria-hidden="true">
               <img src={emotionMeta.iconSrc} alt="" className="emotion-calendar-widget__day-emotion-icon" />
-            ) : null}
-          </span>
+            </span>
+          ) : null}
         </span>
         {notePreview ? (
           <span className={`emotion-calendar-widget__day-note${compact ? " is-compact" : ""}`}>{notePreview}</span>
-        ) : null}
-        {isStreak ? (
-          <span className="emotion-calendar-widget__day-streak" aria-hidden="true">
-            🔥
-          </span>
         ) : null}
       </BaseDayButton>
     );
@@ -83,20 +77,21 @@ function EmotionCalendarWidget({
   return (
     <div className={`emotion-calendar-widget${compact ? " is-compact" : ""}`}>
       <div className="emotion-calendar-widget__summary">
-        <p className="emotion-calendar-widget__summary-text">這個月已經留下 {monthEntriesCount} 則情緒記錄。</p>
-        <div className="emotion-calendar__streak" aria-live="polite">
-          <strong>
-            <span aria-hidden="true">🔥</span>
-            連續打卡 {streakInfo.count} 天
+        <section className="emotion-calendar-widget__summary-card" aria-label="本月紀錄摘要">
+          <span className="emotion-calendar-widget__summary-label">本月紀錄</span>
+          <strong className="emotion-calendar-widget__summary-value">
+            <span className="emotion-calendar-widget__summary-number">{monthEntriesCount}</span>
+            <span className="emotion-calendar-widget__summary-unit">則情緒記錄</span>
           </strong>
-          <span>
-            {streakInfo.count === 0
-              ? "從今天開始留下第一筆也可以。"
-              : streakInfo.anchoredTo === "today"
-                ? "今天也有把心情留在這裡。"
-                : "昨天為止都還維持著這段連續記錄。"}
-          </span>
-        </div>
+        </section>
+
+        <section className="emotion-calendar-widget__summary-card emotion-calendar-widget__summary-card--accent" aria-live="polite">
+          <span className="emotion-calendar-widget__summary-label">連續打卡</span>
+          <strong className="emotion-calendar-widget__summary-value">
+            <span className="emotion-calendar-widget__summary-number">{streakInfo.count}</span>
+            <span className="emotion-calendar-widget__summary-unit">天</span>
+          </strong>
+        </section>
       </div>
 
       <DayPicker

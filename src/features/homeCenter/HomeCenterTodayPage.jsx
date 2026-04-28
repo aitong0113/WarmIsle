@@ -23,16 +23,16 @@ function HomeCenterTodayPage() {
       description="先替今天的自己取一個最接近的名字，再決定要不要多寫一點。"
     >
       <article className="home-center-card">
-        <div className="home-center-card__split">
-          <div>
+        <div className="home-center-card__split home-center-card__split--today">
+          <div className="emotion-current-inline">
             <span className="home-center-card__label">目前記錄</span>
             {todayEmotionMeta ? (
-              <strong className="emotion-current-chip">
-                <img src={todayEmotionMeta.iconSrc} alt="" className="emotion-current-chip__icon" aria-hidden="true" />
-                <span>{todayEmotionMeta.label}</span>
+              <strong className="emotion-current-inline__value">
+                <img src={todayEmotionMeta.iconSrc} alt="" className="emotion-current-inline__icon" aria-hidden="true" />
+                <span>今日情緒 {todayEmotionMeta.label}</span>
               </strong>
             ) : (
-              <strong>還沒選今天的情緒</strong>
+              <strong className="emotion-current-inline__placeholder">今日情緒尚未選擇</strong>
             )}
           </div>
         </div>
@@ -55,10 +55,10 @@ function HomeCenterTodayPage() {
         </label>
 
         <div className="home-center-card__actions">
+          {journalFeedback && <p className="home-center-card__feedback">{journalFeedback}</p>}
           <button type="button" className="btn btn-soft" onClick={handleSaveTodayNote}>
             存到今日紀錄
           </button>
-          {journalFeedback && <p className="home-center-card__feedback">{journalFeedback}</p>}
         </div>
       </article>
     </HomeCenterShell>

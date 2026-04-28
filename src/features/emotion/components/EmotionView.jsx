@@ -1,4 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
+import {
+  BsChatDotsFill,
+  BsLockFill,
+  BsPatchCheckFill,
+  BsPersonCircle,
+  BsStars,
+} from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import beachDesktopImage from "../../../assets/scenes/beach/baeach-desktop.png";
@@ -11,9 +18,9 @@ import { todayLocalDate } from "../../../utils/date";
 import { createSandWriting, fetchRecentSandWritings, fetchSandWritingLikesMeta, toggleSandWritingLike } from "../../../services/sandWritingApi";
 
 const VISIBILITY_OPTIONS = [
-  { id: "private", label: "私密", icon: "🔒", hint: "只先留給自己。" },
-  { id: "anonymous", label: "匿名", icon: "🌊", hint: "留在沙灘上讓旅人看見。" },
-  { id: "counselor", label: "心理師", icon: "✨", hint: "希望被更溫柔地接住。" },
+  { id: "private", label: "私密", icon: BsLockFill, hint: "只先留給自己。" },
+  { id: "anonymous", label: "匿名", icon: BsPersonCircle, hint: "留在沙灘上讓旅人看見。" },
+  { id: "counselor", label: "心理師", icon: BsPatchCheckFill, hint: "希望被更溫柔地接住。" },
 ];
 
 const FILTER_OPTIONS = [
@@ -399,6 +406,7 @@ function EmotionView() {
                   <div className="emotion-visibility-pills" role="radiogroup" aria-label="可見性選擇">
                     {VISIBILITY_OPTIONS.map((option) => {
                       const isSelected = composer.visibility === option.id;
+                      const Icon = option.icon;
                       return (
                         <button
                           key={option.id}
@@ -407,7 +415,7 @@ function EmotionView() {
                           aria-pressed={isSelected}
                           onClick={() => handleComposerChange("visibility", option.id)}
                         >
-                          <span>{option.icon}</span>
+                          <span className="emotion-visibility-pill__icon" aria-hidden="true"><Icon /></span>
                           <strong>{option.label}</strong>
                           <small>{option.hint}</small>
                         </button>
@@ -445,7 +453,9 @@ function EmotionView() {
 
             <div className="emotion-composer-card__footer">
               <div className="emotion-composer-card__visibility-hint">
-                <span>{selectedVisibility.icon}</span>
+                <span className="emotion-composer-card__visibility-icon" aria-hidden="true">
+                  <selectedVisibility.icon />
+                </span>
                 <p>{selectedVisibility.hint}</p>
               </div>
               <button
@@ -496,6 +506,7 @@ function EmotionView() {
               const moodMeta = post.mood ? emotionMetaById[post.mood] : null;
               const visibilityMeta =
                 VISIBILITY_OPTIONS.find((option) => option.id === post.visibility) || VISIBILITY_OPTIONS[1];
+              const VisibilityIcon = visibilityMeta.icon;
 
               return (
                 <article
@@ -510,11 +521,17 @@ function EmotionView() {
                           {moodMeta.label}
                         </span>
                       ) : (
-                        <span className="emotion-post-card__mood is-neutral">🌊 匿名</span>
+                        <span className="emotion-post-card__mood is-neutral">
+                          <BsPersonCircle aria-hidden="true" />
+                          匿名
+                        </span>
                       )}
                       <span className="emotion-post-card__time">{post.isMine ? "你" : "匿名旅人"} · {formatCreatedAt(post.created_at)}</span>
                     </div>
-                    <span className="emotion-post-card__light">✨ 心光 +{post.lightBoost || 1}</span>
+                    <span className="emotion-post-card__light">
+                      <BsStars aria-hidden="true" />
+                      心光 +{post.lightBoost || 1}
+                    </span>
                   </div>
 
                   {post.title && <h4>{post.title}</h4>}
@@ -522,12 +539,18 @@ function EmotionView() {
 
                   <div className="emotion-post-card__support">
                     <div className="emotion-post-card__ai">
-                      <span>🫧 哈可</span>
+                      <span>
+                        <BsChatDotsFill aria-hidden="true" />
+                        哈可
+                      </span>
                       <p>{post.aiReply}</p>
                     </div>
                     {post.expertReply && (
                       <div className="emotion-post-card__expert">
-                        <span>{visibilityMeta.icon} 心理師精選</span>
+                        <span>
+                          <VisibilityIcon aria-hidden="true" />
+                          心理師精選
+                        </span>
                         <p>{post.expertReply}</p>
                       </div>
                     )}
@@ -535,13 +558,13 @@ function EmotionView() {
 
                   <div className="emotion-post-card__actions">
                     <div className="emotion-post-card__empathy">
-                      <span>🤍 我也有過 {post.empathy?.relate || 0}</span>
+                      <span>我也有過 {post.empathy?.relate || 0}</span>
                       <button
                         type="button"
                         className={`emotion-post-card__hug${post.likedByMe ? " is-active" : ""}`}
                         onClick={() => handleToggleLike(post.id)}
                       >
-                        🤍 抱抱你 {post.empathy?.hug || 0}
+                        抱抱你 {post.empathy?.hug || 0}
                       </button>
                     </div>
                     <button
@@ -549,7 +572,8 @@ function EmotionView() {
                       className="emotion-post-card__cta"
                       onClick={() => handleOpenCabin(post)}
                     >
-                      🐻 去小屋聊聊
+                      <BsChatDotsFill aria-hidden="true" />
+                      去小屋聊聊
                     </button>
                   </div>
                 </article>

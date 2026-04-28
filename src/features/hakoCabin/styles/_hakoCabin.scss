@@ -53,7 +53,7 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
   height: 90%;
   max-width: 1340px;
   margin: 0 auto;
-  padding: 92px 24px 56px;
+  padding: calc(var(--scenic-header-space, 108px) + var(--feature-title-main-offset, 64px) - 22px) 24px var(--feature-scene-hero-bottom, 64px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,16 +71,49 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
   overflow: visible;
 }
 
+.hako-cabin-page-header {
+  position: absolute;
+  top: clamp(22px, 3vw, 34px);
+  left: 50%;
+  z-index: 2;
+  width: min(560px, calc(100% - 64px));
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.hako-cabin-page-header__eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba($primary-dark, 0.42);
+}
+
+.hako-cabin-page-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 40px);
+  line-height: 1.12;
+  color: rgba($text-main, 0.88);
+}
+
+.hako-cabin-page-header__subtitle {
+  margin: 12px auto 0;
+  max-width: 420px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba($text-main, 0.46);
+}
+
 .hako-cabin-hero {
   position: absolute;
   inset: auto;
-  left: 51.5%;
-  top: 164px;
+  left: 61.5%;
+  top: 156px;
   bottom: auto;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  width: min(400px, 44vw);
+  width: min(410px, 42vw);
   min-height: auto;
   max-height: none;
   transform: translateX(-50%);
@@ -126,8 +159,8 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
 
 .hako-cabin-intro__bubble {
   position: absolute;
-  top: 176px;
-  left: max(40px, calc(50% - 520px));
+  top: 208px;
+  left: max(56px, calc(50% - 400px));
   z-index: 2;
   width: min(360px, calc(100% - 64px));
   padding: 22px 24px;
@@ -423,7 +456,26 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
   overflow-x: hidden;
   overscroll-behavior: contain;
   padding-right: 4px;
-  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($accent-coral-500, 0.7) rgba($surface-soft, 0.34);
+}
+
+.hako-conversation-list::-webkit-scrollbar,
+.hako-chat-messages::-webkit-scrollbar {
+  width: 9px;
+}
+
+.hako-conversation-list::-webkit-scrollbar-track,
+.hako-chat-messages::-webkit-scrollbar-track {
+  background: rgba($surface-soft, 0.34);
+  border-radius: 999px;
+}
+
+.hako-conversation-list::-webkit-scrollbar-thumb,
+.hako-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba($accent-coral-500, 0.72);
+  border-radius: 999px;
+  border: 2px solid rgba($surface-soft, 0.72);
 }
 
 .hako-conversation-group {
@@ -660,7 +712,8 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
 .hako-cabin-subtitle {
   margin-top: 8px;
   max-width: 560px;
-  color: rgba($text-main, 0.9);
+  font-size: 14px;
+  color: rgba($text-main, 0.54);
   line-height: 1.7;
 }
 
@@ -710,6 +763,8 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba($accent-coral-500, 0.7) rgba($surface-soft, 0.34);
 }
 
 .hako-chat-welcome {
@@ -1009,6 +1064,16 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
     flex-direction: column;
   }
 
+  .hako-cabin-page-header {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
   .hako-cabin-intro__bubble {
     position: relative;
     top: auto;
@@ -1066,6 +1131,14 @@ $hako-soft-shadow: 0 8px 18px rgba($accent-mist-700, 0.08);
 }
 
 @media (max-width: 560px) {
+  .hako-cabin-page-header h1 {
+    font-size: 30px;
+  }
+
+  .hako-cabin-page-header__subtitle {
+    font-size: 13px;
+  }
+
   .hako-cabin-shell {
     --hako-cabin-bg-size: 220% auto;
     --hako-cabin-overlay-opacity: 0.48;

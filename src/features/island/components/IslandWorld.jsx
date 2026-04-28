@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   BsArrowCounterclockwise,
@@ -26,13 +26,17 @@ const QUICK_ICON_BY_ID = {
 };
 
 function IslandWorld() {
-  const [activeQuickPanel, setActiveQuickPanel] = useState("today");
+  const [activeQuickPanel, setActiveQuickPanel] = useState("");
+  const quickShellRef = useRef(null);
   const {
     currentMonth,
     emotionMetaById,
     journalFeedback,
     monthDays,
+    monthEmotionBreakdown,
     monthEntriesCount,
+    monthLabel,
+    recentDisplayNote,
     recentEmotionMeta,
     recentLog,
     selectedDate,
@@ -57,6 +61,18 @@ function IslandWorld() {
     setSelectedDate(today);
     setCurrentMonth(new Date(todayDate.getFullYear(), todayDate.getMonth(), 1));
   }, [activeQuickPanel, setCurrentMonth, setSelectedDate, today]);
+
+  useEffect(() => {
+    if (!activeQuickPanel) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (quickShellRef.current?.contains(event.target)) return;
+      setActiveQuickPanel("");
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [activeQuickPanel]);
 
   const activeAction = HOME_CENTER_PAGES.find((action) => action.id === activeQuickPanel) || null;
 
@@ -84,15 +100,15 @@ function IslandWorld() {
             先替今天的自己取一個最接近的名字，再決定要不要多寫一點。
           </p>
 
-          <div className="island-world__bubble-current">
+          <div className="island-world__bubble-current island-world__bubble-current--inline">
             <span className="island-world__bubble-label">目前記錄</span>
             {todayEmotionMeta ? (
-              <strong className="emotion-current-chip">
-                <img src={todayEmotionMeta.iconSrc} alt="" className="emotion-current-chip__icon" aria-hidden="true" />
-                <span>{todayEmotionMeta.label}</span>
+              <strong className="emotion-current-inline__value">
+                <img src={todayEmotionMeta.iconSrc} alt="" className="emotion-current-inline__icon" aria-hidden="true" />
+                <span>今日情緒 {todayEmotionMeta.label}</span>
               </strong>
             ) : (
-              <strong>還沒選今天的情緒</strong>
+              <strong className="emotion-current-inline__placeholder">今日情緒尚未選擇</strong>
             )}
           </div>
 
@@ -111,10 +127,10 @@ function IslandWorld() {
           />
 
           <div className="island-world__bubble-actions">
+            {journalFeedback && <p className="island-world__bubble-feedback">{journalFeedback}</p>}
             <button type="button" className="btn btn-soft" onClick={handleSaveTodayNote}>
               存到今日紀錄
             </button>
-            {journalFeedback && <p className="island-world__bubble-feedback">{journalFeedback}</p>}
           </div>
         </div>
       );
@@ -143,7 +159,7 @@ function IslandWorld() {
 
     return (
       <div className="island-world__bubble-block">
-        <p className="island-world__bubble-copy">連續天數和最近情緒，會把你最近的節奏慢慢勾勒出來。</p>
+        <p className="island-world__bubble-copy">把這個月出現過的情緒攤開來看，會比小波形更直觀地知道自己最近待在哪些感受裡。</p>
 
         <div className="island-world__status-grid">
           <div className="island-world__status-card">
@@ -164,9 +180,41 @@ function IslandWorld() {
           </div>
         </div>
 
+        <div className="island-world__chart-card">
+          <div className="island-world__chart-head">
+            <span className="island-world__bubble-label">{monthLabel}</span>
+            <strong>本月情緒佔比</strong>
+          </div>
+
+          {monthEmotionBreakdown.length ? (
+            <div className="island-world__emotion-share-list" aria-label="本月情緒佔比圖表">
+              {monthEmotionBreakdown.map((emotion) => (
+                <div key={emotion.id} className="island-world__emotion-share-row">
+                  <div className="island-world__emotion-share-meta">
+                    <img src={emotion.iconSrc} alt="" className="island-world__emotion-share-icon" aria-hidden="true" />
+                    <span>{emotion.label}</span>
+                  </div>
+                  <div className="island-world__emotion-share-track" aria-hidden="true">
+                    <div
+                      className="island-world__emotion-share-fill"
+                      style={{ width: `${Math.max(emotion.percentage, 8)}%` }}
+                    />
+                  </div>
+                  <div className="island-world__emotion-share-stats">
+                    <strong>{emotion.percentage}%</strong>
+                    <span>{emotion.count} 筆</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="island-world__chart-empty">這個月還沒有情緒紀錄，先從今天的一筆開始。</p>
+          )}
+        </div>
+
         <div className="island-world__bubble-note-preview">
           <span className="island-world__bubble-label">最近一句話</span>
-          <p>{todayLog?.note || recentLog?.note || "你還沒有留下短日記，今天可以從一句話開始。"}</p>
+          <p>{recentDisplayNote || "你還沒有留下短日記，今天可以從一句話開始。"}</p>
         </div>
       </div>
     );
@@ -174,7 +222,7 @@ function IslandWorld() {
 
   return (
     <section className="island-world">
-      <div className="island-world__quick-shell">
+      <div ref={quickShellRef} className="island-world__quick-shell" onClick={(event) => event.stopPropagation()}>
         <div className="island-world__quick-actions" aria-label="島嶼快捷資訊">
           {HOME_CENTER_PAGES.map((action) => {
             const ActionIcon = QUICK_ICON_BY_ID[action.id] || action.icon;
@@ -218,8 +266,8 @@ function IslandWorld() {
       </div>
 
       <div className="island-world__scene">
-        <img src={islandMap} alt="" className="island-world__backdrop" aria-hidden="true" />
-        <img src={islandMap} alt="暖心島地圖" className="island-world__map" />
+        <img src={islandMap} alt="" className="island-world__backdrop" aria-hidden="true" draggable={false} />
+        <img src={islandMap} alt="暖心島地圖" className="island-world__map" draggable={false} />
         <div className="island-world__veil" />
 
         <Link

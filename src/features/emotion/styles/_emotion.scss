@@ -6,29 +6,38 @@
   max-width: none;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  margin-top: -108px;
+  margin-top: calc(var(--scenic-content-start, 104px) * -1);
   padding: 0 0 56px;
-  background: linear-gradient(180deg, #f7efe5 0%, #e7f3f6 48%, #fff9f0 100%);
+  background: linear-gradient(180deg, $surface-ground 0%, $surface-panel 48%, $surface-cream 100%);
 }
 
 .emotion-beach__hero {
   position: relative;
   min-height: 560px;
   overflow: hidden;
-  background-color: #d7e9ef;
+  background-color: mix($warm-shell, $sky-soft, 70%);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+.emotion-beach__hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba($surface-cream, 0.12) 0%, rgba($primary-mist, 0.1) 38%, rgba($warm-shell, 0.18) 100%);
+  pointer-events: none;
+}
+
 .emotion-beach__overlay {
+  position: relative;
   min-height: 560px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 28px;
-  padding: 142px 32px 56px;
-  background: linear-gradient(180deg, rgba(14, 42, 55, 0.12) 0%, rgba(14, 42, 55, 0.04) 42%, rgba(255, 251, 245, 0.14) 100%);
+  padding: calc(var(--scenic-content-start, 104px) - 20px) 32px var(--feature-scene-hero-bottom, 64px);
+  background: linear-gradient(180deg, rgba($text-main, 0.08) 0%, rgba($primary-dark, 0.03) 42%, rgba($surface-cream, 0.22) 100%);
 }
 
 .emotion-beach__intro {
@@ -45,7 +54,7 @@
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(18, 71, 91, 0.76);
+  color: rgba($primary-dark, 0.7);
 }
 
 .emotion-beach__intro h2,
@@ -53,11 +62,11 @@
 .emotion-deep-links__card h3,
 .emotion-composer-card__header h3 {
   margin: 0;
-  color: #153847;
+  color: $text-main;
 }
 
 .emotion-beach__intro h2 {
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(32px, 4vw, 40px);
   line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 10px;
@@ -66,9 +75,9 @@
 .emotion-beach__lede {
   margin: 0 auto;
   max-width: 440px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.7;
-  color: rgba(21, 56, 71, 0.84);
+  color: rgba($text-main, 0.54);
 }
 
 .emotion-composer-card {
@@ -76,10 +85,10 @@
   margin: 0 auto;
   padding: 24px 28px;
   border-radius: 28px;
-  background: rgba(255, 249, 241, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba($surface-cream, 0.74);
+  border: 1px solid rgba($surface-elevated, 0.82);
   backdrop-filter: blur(18px);
-  box-shadow: 0 18px 40px rgba(31, 74, 93, 0.18);
+  box-shadow: 0 18px 40px rgba($primary-dark, 0.14);
 }
 
 .emotion-composer-card__body {
@@ -123,7 +132,7 @@
 .emotion-feed-shell__empty,
 .emotion-deep-links__card p {
   margin: 6px 0 0;
-  color: rgba(35, 68, 82, 0.76);
+  color: rgba($text-main, 0.72);
   line-height: 1.7;
 }
 
@@ -133,8 +142,8 @@
   gap: 10px;
   padding: 10px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  color: #194556;
+  background: rgba($surface-elevated, 0.82);
+  color: $primary-dark;
   font-weight: 700;
 }
 
@@ -157,24 +166,24 @@
 .emotion-composer-card__label {
   font-size: 13px;
   font-weight: 700;
-  color: rgba(35, 68, 82, 0.8);
+  color: rgba($text-main, 0.8);
 }
 
 .emotion-composer-card__input,
 .emotion-composer-card__textarea {
   width: 100%;
-  border: 1px solid rgba(58, 112, 130, 0.2);
-  background: rgba(255, 255, 255, 0.82);
-  color: #173948;
+  border: 1px solid rgba($primary, 0.18);
+  background: rgba($surface-elevated, 0.88);
+  color: $text-main;
   font: inherit;
   border-radius: 20px;
   padding: 14px 16px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  box-shadow: inset 0 1px 0 rgba($surface-elevated, 0.5);
 
   &:focus {
     outline: none;
-    border-color: rgba(38, 111, 136, 0.46);
-    box-shadow: 0 0 0 4px rgba(116, 186, 210, 0.16);
+    border-color: rgba($primary-dark, 0.34);
+    box-shadow: 0 0 0 4px rgba($primary-soft, 0.24);
   }
 }
 
@@ -195,12 +204,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  padding: 14px 12px;
+  gap: 3px;
+  padding: 10px 12px;
   border-radius: 18px;
-  border: 1px solid rgba(58, 112, 130, 0.16);
-  background: rgba(255, 255, 255, 0.7);
-  color: #194556;
+  border: 1px solid rgba($primary, 0.14);
+  background: rgba($surface-elevated, 0.78);
+  color: $text-main;
   cursor: pointer;
   text-align: left;
   transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
@@ -211,27 +220,45 @@
   }
 
   small {
-    color: rgba(35, 68, 82, 0.68);
-    line-height: 1.5;
+    color: rgba($text-main, 0.64);
+    line-height: 1.4;
   }
 
   &:hover {
     transform: translateY(-1px);
-    border-color: rgba(38, 111, 136, 0.34);
+    border-color: rgba($primary-dark, 0.24);
   }
 
   &.is-selected {
-    border-color: rgba(29, 90, 114, 0.5);
-    box-shadow: 0 10px 24px rgba(67, 140, 163, 0.16);
-    background: linear-gradient(180deg, rgba(230, 246, 249, 0.94) 0%, rgba(255, 250, 242, 0.94) 100%);
+    border-color: rgba($primary-dark, 0.34);
+    box-shadow: 0 10px 24px rgba($primary, 0.12);
+    background: linear-gradient(180deg, rgba($primary-mist, 0.86) 0%, rgba($surface-cream, 0.96) 100%);
   }
+}
+
+.emotion-visibility-pill__icon,
+.emotion-composer-card__visibility-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $primary-dark;
+}
+
+.emotion-visibility-pill__icon {
+  font-size: 15px;
+  margin-bottom: 0;
 }
 
 .emotion-composer-card__visibility-hint {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: rgba(35, 68, 82, 0.76);
+  color: rgba($text-main, 0.74);
+
+  .emotion-composer-card__visibility-icon {
+    font-size: 16px;
+    color: $primary-dark;
+  }
 
   p {
     margin: 0;
@@ -240,11 +267,15 @@
 
 .emotion-composer-card__submit {
   min-width: 120px;
+  border-radius: 999px;
+  border-color: rgba($primary, 0.18);
+  background: linear-gradient(180deg, rgba($surface-elevated, 0.98), rgba($surface-panel, 0.98));
+  box-shadow: 0 10px 22px rgba($accent-mist-700, 0.08);
 }
 
 .emotion-composer-card__feedback {
   margin: 14px 0 0;
-  color: #1e6278;
+  color: $primary-dark;
   font-size: 14px;
 }
 
@@ -258,7 +289,7 @@
   border-radius: 28px;
   background: rgba(255, 252, 248, 0.84);
   border: 1px solid rgba(234, 224, 208, 0.78);
-  box-shadow: 0 16px 32px rgba(34, 79, 98, 0.08);
+  box-shadow: 0 16px 32px rgba($primary-dark, 0.08);
 }
 
 .emotion-feed-shell__header {
@@ -283,13 +314,16 @@
 .emotion-feed-tabs__button {
   padding: 10px 16px;
   border-radius: 999px;
-  background: rgba(229, 241, 245, 0.72);
-  color: rgba(25, 69, 86, 0.78);
+  background: linear-gradient(180deg, rgba($surface-elevated, 0.96), rgba($surface-panel, 0.96));
+  border: 1px solid rgba($primary-soft, 0.5);
+  color: rgba($text-main, 0.78);
+  box-shadow: 0 8px 18px rgba($accent-mist-700, 0.06);
 
   &.is-active {
-    background: #194556;
-    color: #fffdf9;
-    box-shadow: 0 12px 24px rgba(25, 69, 86, 0.18);
+    border-color: rgba($primary, 0.22);
+    background: linear-gradient(180deg, rgba($primary-mist, 0.82), rgba($surface-cream, 0.98));
+    color: $text-main;
+    box-shadow: 0 12px 24px rgba($primary, 0.12);
   }
 }
 
@@ -301,9 +335,9 @@
 .emotion-post-card {
   padding: 22px;
   border-radius: 24px;
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.98) 0%, rgba(248, 252, 252, 0.98) 100%);
-  border: 1px solid rgba(217, 226, 228, 0.92);
-  box-shadow: 0 12px 28px rgba(34, 79, 98, 0.08);
+  background: linear-gradient(180deg, rgba($surface-cream, 0.98) 0%, rgba($surface-elevated, 0.98) 100%);
+  border: 1px solid rgba($primary-soft, 0.36);
+  box-shadow: 0 12px 28px rgba($primary-dark, 0.08);
 }
 
 .emotion-post-card.is-light-pulse {
@@ -328,7 +362,7 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #1d5a72;
+  color: $primary-dark;
 }
 
 .emotion-post-card__mood img {
@@ -337,24 +371,37 @@
   object-fit: contain;
 }
 
+.emotion-post-card__mood svg,
+.emotion-post-card__light svg,
+.emotion-post-card__ai span svg,
+.emotion-post-card__expert span svg,
+.emotion-post-card__cta svg {
+  flex: 0 0 auto;
+}
+
+.emotion-post-card__mood svg,
+.emotion-post-card__light svg {
+  font-size: 15px;
+}
+
 .emotion-post-card__mood.is-neutral {
-  color: rgba(29, 90, 114, 0.72);
+  color: rgba($primary-dark, 0.68);
 }
 
 .emotion-post-card__time {
-  color: rgba(35, 68, 82, 0.62);
+  color: rgba($text-main, 0.58);
   font-size: 13px;
 }
 
 .emotion-post-card h4 {
   margin: 16px 0 8px;
   font-size: 22px;
-  color: #173948;
+  color: $text-main;
 }
 
 .emotion-post-card__content {
   margin: 0;
-  color: #264755;
+  color: rgba($text-main, 0.9);
   line-height: 1.8;
   font-size: 16px;
 }
@@ -373,22 +420,22 @@
     align-items: center;
     gap: 8px;
     font-weight: 700;
-    color: #16485b;
+    color: $text-main;
   }
 
   p {
     margin: 8px 0 0;
-    color: rgba(35, 68, 82, 0.8);
+    color: rgba($text-main, 0.78);
     line-height: 1.7;
   }
 }
 
 .emotion-post-card__ai {
-  background: rgba(231, 245, 248, 0.88);
+  background: rgba($primary-mist, 0.56);
 }
 
 .emotion-post-card__expert {
-  background: rgba(255, 243, 228, 0.92);
+  background: rgba($primary-soft, 0.3);
 }
 
 .emotion-post-card__actions {
@@ -398,26 +445,29 @@
 
 .emotion-post-card__empathy {
   gap: 8px;
-  color: rgba(35, 68, 82, 0.78);
+  color: rgba($text-main, 0.74);
 }
 
 .emotion-post-card__hug {
   align-self: flex-start;
   padding: 0;
   background: transparent;
-  color: rgba(35, 68, 82, 0.82);
+  color: rgba($text-main, 0.82);
 
   &.is-active {
-    color: #b66278;
+    color: $primary-dark;
   }
 }
 
 .emotion-post-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 18px;
   border-radius: 999px;
-  background: #194556;
-  color: #fffdf8;
-  box-shadow: 0 12px 24px rgba(25, 69, 86, 0.18);
+  background: $primary-dark;
+  color: $surface-cream;
+  box-shadow: 0 12px 24px rgba($primary-dark, 0.18);
 
   &:hover {
     transform: translateY(-1px);
@@ -433,9 +483,10 @@
 .emotion-btn {
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid $warm-sand;
-  background: white;
+  border: 1px solid rgba($primary-soft, 0.52);
+  background: linear-gradient(180deg, rgba($surface-elevated, 0.98), rgba($surface-panel, 0.96));
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba($accent-mist-700, 0.06);
   transition: all .2s;
 }
 
@@ -462,13 +513,14 @@
 }
 
 .emotion-btn:hover {
-  background: $warm-sand;
+  background: linear-gradient(180deg, rgba($surface-elevated, 1), rgba($surface-panel, 0.98));
+  border-color: rgba($primary, 0.2);
 }
 
 .emotion-btn.is-selected {
-  border-color: rgba($primary-dark, 0.52);
-  background: rgba($primary-soft, 0.42);
-  box-shadow: 0 0 0 3px rgba($primary, 0.18);
+  border-color: rgba($primary-dark, 0.3);
+  background: linear-gradient(180deg, rgba($primary-mist, 0.9), rgba($surface-cream, 0.98));
+  box-shadow: 0 10px 22px rgba($primary, 0.12), 0 0 0 3px rgba($primary, 0.1);
 }
 
 @media (max-width: 768px) {

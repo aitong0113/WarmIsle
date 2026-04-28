@@ -3,9 +3,9 @@
 .campfire-page {
   position: relative;
   min-height: 100vh;
-  padding: 32px 16px 160px;
+  padding: 0 16px 160px;
   display: grid;
-  gap: 18px;
+  gap: var(--feature-hero-gap, 24px);
   justify-content: center;
   background: linear-gradient(180deg, mix($surface-muted, $milk-cream, 72%) 0%, $surface-soft 100%);
 }
@@ -54,7 +54,7 @@
   z-index: 1;
   width: min(100%, 1040px);
   margin: 0 auto;
-  padding: 28px 30px;
+  padding: 0 30px 30px;
   border-radius: 28px;
   background: $feature-campfire-hero;
   color: $text-main;
@@ -76,13 +76,16 @@
 
 .campfire-hero h1 {
   margin: 0 0 10px;
-  font-size: 34px;
+  font-size: clamp(32px, 4vw, 40px);
+  line-height: 1.12;
 }
 
 .campfire-hero p {
   margin: 0;
   max-width: 640px;
-  color: $text-soft;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba($text-main, 0.54);
 }
 
 .campfire-hero__panel {

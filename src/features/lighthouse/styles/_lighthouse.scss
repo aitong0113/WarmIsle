@@ -4,6 +4,7 @@
   position: relative;
   max-width: 960px;
   margin: 0 auto;
+  padding-top: 0;
   padding-inline: 24px;
 }
 
@@ -48,7 +49,8 @@
 }
 
 .lighthouse-header {
-  margin-bottom: 16px;
+  margin-bottom: var(--feature-hero-gap, 24px);
+  padding-block: 0 2px;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -62,9 +64,18 @@
   text-transform: uppercase;
 }
 
+.lighthouse-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 40px);
+  line-height: 1.12;
+  color: $text-main;
+}
+
 .lighthouse-subtitle {
   margin-top: 8px;
-  color: $text-soft;
+  font-size: 14px;
+  color: rgba($text-main, 0.54);
+  line-height: 1.7;
 }
 
 .lighthouse-filters {
